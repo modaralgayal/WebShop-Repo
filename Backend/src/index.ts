@@ -2,20 +2,23 @@ import http from 'http'
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
+import cookies from "cookie-parser"
 import compression from 'compression'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import router from './router'
 import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 const app = express()
 app.use(cors({
   credentials: true
 }))
 app.use(compression())
 app.use(cookieParser())
+app.use(cookies())
 app.use(bodyParser.json())
+app.use('/', router())
 
 const server = http.createServer(app)
 server.listen(3001, () => {
@@ -36,6 +39,5 @@ db.on('error', (error) => {
 db.once('open', () => {
   console.log('Connected to MongoDB')
 })
-app.use('/', router())
 
 export default app

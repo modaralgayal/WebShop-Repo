@@ -24,11 +24,11 @@ export const deleteUserById = (id: string) => UserModel.findOneAndDelete({ _id: 
 export const editUserById = (id: string, values: Record<string, any>) => UserModel.findByIdAndUpdate(id, values)
 export const deleteAllUsers = async () => {
   try {
-    const result = await UserModel.deleteMany({});
-    console.log(`Deleted ${result.deletedCount} user(s)`);
-    return result;
+    const result = await UserModel.deleteMany({})
+    console.log(`Deleted ${result.deletedCount} user(s)`)
+    return result
   } catch (error) {
-    console.error('Error deleting users:', error);
-    throw error;
+    console.error('Error deleting users:', error)
+    throw error
   }
-};
+}

@@ -7,18 +7,21 @@ export const login = async (req: express.Request, res: express.Response) => {
     const { email, password } = req.body
 
     if (!email || !password) {
+      console.log('no email or password')
       return res.sendStatus(400)
     }
 
     const user = await getUserByEmail(email).select('+authentication.salt +authentication.password')
 
     if (!user) {
+      console.log('User does not exist')
       res.sendStatus(400)
     }
 
     const expectedHash = authentication(user.authentication.salt, password)
 
     if (user.authentication.password !== expectedHash) {
+      console.log("wrong pass")
       return res.sendStatus(403)
     }
     const salt = random()
@@ -27,11 +30,11 @@ export const login = async (req: express.Request, res: express.Response) => {
 
     await user.save()
 
-    res.cookie('WEB-AUTH', user.authentication.sessiontoken, { domain: 'localhost', path: '/' })
+    res.cookie('WEB-AUTH', user.authentication.sessiontoken, { domain: 'localhost', path: "/"})
     // console.log('success')
     return res.status(200).json(user).end()
   } catch (error) {
-    console.log(error)
+    console.log(error.response)
     return res.sendStatus(400)
   }
 }

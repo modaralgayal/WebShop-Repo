@@ -1,7 +1,6 @@
 import type express from 'express'
 import { get, merge } from 'lodash'
 import { ObjectId } from 'mongodb'
-
 import { getUserBySessionToken } from '../db/users'
 
 export const isAuthenticated = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -19,7 +18,6 @@ export const isAuthenticated = async (req: express.Request, res: express.Respons
       return res.sendStatus(403)
     }
     console.log(existingUser)
-
 
     merge(req, { identity: existingUser })
 

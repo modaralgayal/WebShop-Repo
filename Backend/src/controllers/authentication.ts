@@ -11,7 +11,6 @@ export const login = async (req: express.Request, res: express.Response) => {
     }
 
     const user = await getUserByEmail(email).select('+authentication.salt +authentication.password')
-    // console.log(user)
 
     if (!user) {
       res.sendStatus(400)
@@ -24,6 +23,7 @@ export const login = async (req: express.Request, res: express.Response) => {
     }
     const salt = random()
     user.authentication.sessiontoken = authentication(salt, user._id.toString())
+    console.log(user.toJSON())
 
     await user.save()
 

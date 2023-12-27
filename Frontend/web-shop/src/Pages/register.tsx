@@ -11,7 +11,6 @@ const CreateUserForm = () => {
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     userService.create({ email, username, password })
-    console.log('Form submitted with:', { email, username, password });
     // Reset form fields after submission
     setEmail('');
     setUsername('');

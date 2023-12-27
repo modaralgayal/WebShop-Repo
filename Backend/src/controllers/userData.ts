@@ -1,7 +1,5 @@
-// import express from "express"; 
-import { getUsers, getUserById, deleteUserById } from "../types/users";
-import { NextFunction, Request, Response } from "express";
-//import { verifyJWT } from "../utils/jwt.utils";
+import { getUsers, getUserById, deleteUserById } from "../types/schemas";
+import { Request, Response } from "express";
 
 
 export const getAll = async (_req: Request, res: Response) => {
@@ -29,20 +27,20 @@ export const getById = async (req: Request, res: Response) => {
     }
 };
 
-export const deleteById = async (req: Request, res: Response, next: NextFunction) => {
-    //const { token } = req.cookies
-
-    const deleteId = req.params.id
-
-    if (!getUserById(deleteId)) {
-        console.log('User does not exist')
-        return next()
-    }
+export const deleteById = async (req: Request, res: Response) => {
     try {
-        await deleteUserById(deleteId)
-        return res.sendStatus(200).json({ message: 'Deletion successful' })
+        const deleteId = req.params.id;
+        const user = await getUserById(deleteId);
+
+        if (!user) {
+            console.log('User does not exist');
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        await deleteUserById(deleteId);
+        return res.status(200).json({ message: 'Deletion successful' });
     } catch (error) {
-        console.log(error)
-        return res.sendStatus(403)
+        console.error(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
-}
+};

@@ -39,14 +39,22 @@ export const isOwner = async (req: Request, res: Response, next: NextFunction) =
   try {
     const { id } = req.params
     console.log('Checking owner', id)
-    const currentUserToken = req.cookies.authorization
+    const currentUserToken = req.cookies && typeof req.cookies.accessToken === 'string' ? req.cookies.accessToken : undefined;
     console.log(currentUserToken)
+    if (!currentUserToken) {
+      console.log('Token Does not exist')
+      return res.sendStatus(403)
+    }
+    const currentUser = await getUserBySessionToken(currentUserToken)
+    console.log(currentUser)
 
-    const currentUserId = getUserBySessionToken(currentUserToken)
-    console.log(currentUserId)
-
-    if (!currentUserId) {
+    if (!currentUser) {
       console.log('Current user does not exist')
+      return res.sendStatus(403)
+    }
+
+    if (currentUser._id.toString() !== id) {
+      console.log('You are not the owner')
       return res.sendStatus(403)
     }
 

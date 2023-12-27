@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import router from './routers/loggingRouter'
 import cookieParser from 'cookie-parser'
+import { deserializeUser } from "./middleware/deserializeuser";
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser())
+app.use('/', router)
+app.use(deserializeUser)
 
 const PORT = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URL;
@@ -27,4 +30,4 @@ if (MONGO_URL) {
   console.error("MongoDB URL is not defined.");
 }
 
-app.use('/', router)
+

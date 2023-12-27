@@ -1,7 +1,7 @@
 import express from "express";
 import { createUser, getUserByEmail } from "../types/users";
 import { random, authenticate } from "../helpers/randomizers";
-import { signJWT, verifyJWT } from "../utils/jwt.utils";
+import { signJWT } from "../utils/jwt.utils";
 
 
 export const login = async (req: express.Request, res: express.Response) => {
@@ -33,7 +33,7 @@ export const login = async (req: express.Request, res: express.Response) => {
             maxAge: 30000
         })
 
-        return res.send(verifyJWT(accessToken).payload)
+        return res.send(user)
         
     } catch (error) {
         console.log(error)
@@ -51,6 +51,7 @@ export const register = async (req: express.Request, res: express.Response) => {
         }
 
         const existingUser = await getUserByEmail(email)
+        console.log(existingUser)
 
         if (existingUser) {
             console.log('user already existis')

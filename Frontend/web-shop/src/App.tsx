@@ -1,58 +1,27 @@
-import React, { useState } from 'react';
-import userService from './Services/users';
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link
+} from 'react-router-dom'
+import Login from './Pages/loginPage';
+import HomePage from './Pages/home';
+import CreateUserForm from './Pages/register';
+
 
 const App = () => {
-  const [users, setUsers] = useState([]);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleLogin = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    try {
-      const user = await userService.login({ email, password });
-      console.log('Logged in:', user);
-      // Here, you might want to set authentication state or redirect to another page upon successful login
-    } catch (error) {
-      console.error('Login failed:', error);
-      // Handle login failure, display error messages, etc.
-    }
-  };
-
-  const handleGetUsers = async () => {
-    try {
-      const fetchedUsers = await userService.getAll();
-      setUsers(fetchedUsers);
-      console.log('Fetched users:', fetchedUsers);
-    } catch (error) {
-      console.error('Failed to fetch users:', error);
-      // Handle error while fetching users
-    }
-  };
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <label>
-          Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-      </form>
-
-      <button onClick={handleGetUsers}>Get Users</button>
-
+    <Router>
       <div>
-        {users.map((user, index) => (
-          <pre key={index}>{JSON.stringify(user, null, 2)}</pre>
-        ))}
+        <Link to="/"></Link>
+        <Link to="/auth/login"></Link>
+        <Link to="/auth/register"></Link>
       </div>
-    </div>
+      <Routes>
+      <Route path="/" element={<HomePage />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/register" element={<CreateUserForm />} />
+      </Routes>
+    </Router>
   );
 };
 

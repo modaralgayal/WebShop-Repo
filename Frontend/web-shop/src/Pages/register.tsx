@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import userService from '../Services/users';
 
 
@@ -7,15 +7,35 @@ const CreateUserForm = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [caughtError, setError] = useState('');
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    userService.create({ email, username, password })
-    // Reset form fields after submission
-    setEmail('');
-    setUsername('');
-    setPassword('');
-  };
+    useEffect(() => {
+        let timer: any;
+        if (caughtError) {
+            timer = setTimeout(() => {
+                setError('');
+            }, 7500); // 7.5 seconds
+        }
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [caughtError]);
+
+    const handleSubmit = async (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+      try {
+        await userService.create({ email, username, password });
+        // Reset form fields after submission
+        console.log('trying to create')
+        setEmail('');
+        setUsername('');
+        setPassword('');
+      } catch (error: any) {
+        console.error('User creation failed:', error);
+        setError(error.toString()); 
+      }
+    };
 
   return (
     <div className="App Header d-flex justify-content-center align-items-center vh-100">
@@ -51,6 +71,13 @@ const CreateUserForm = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
+              {caughtError && (
+                            <Row className="mb-3">
+                                <Col>
+                                    <Alert variant="danger">{caughtError}</Alert>
+                                </Col>
+                            </Row>
+                        )}
               <Button variant="primary" type="submit">
                 Create User
               </Button>

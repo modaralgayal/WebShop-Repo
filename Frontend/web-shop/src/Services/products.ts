@@ -11,4 +11,4 @@ export const getAll = async () => {
       }
   };
   
-
+  

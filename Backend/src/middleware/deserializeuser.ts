@@ -5,17 +5,17 @@ export function deserializeUser(req: Request, res: Response, next: NextFunction)
     const {accessToken} = req.cookies;
     // console.log(accessToken)
     if(!accessToken) {
-        console.log('AccessToken Not Found')
-        return res.sendStatus(403)
+        console.log('AccessToken Not Found');
+        return res.sendStatus(403);
     }
-    console.log('Found Token')
+    console.log('Found Token');
 
     const {payload} = verifyJWT(accessToken);
 
     if (payload) {
         // @ts-ignore
-        req.user = payload
-        return next()
+        req.user = payload;
+        return next();
     }
-    return next()
+    return next();
 }

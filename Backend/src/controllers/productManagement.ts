@@ -8,13 +8,13 @@ export const addProductToBasket = async (req: Request, res: Response) => {
     const user = await getUserBySessionToken(currentUserToken);
 
     if (!user || !productId) {
-      throw new Error("User or product not found");
+      return res.status(404).json({ message: "User or Product Not Found" });
     }
 
     // Check if the product ID already exists in the user's basket
     const isProductAlreadyAdded = user.basket.some((item) => item.toString() === productId);
     if (isProductAlreadyAdded) {
-      return res.status(400).json({ error: "Product already exists in the basket" });
+      return res.status(400).json({ message: "Product already exists in the basket" });
     }
 
     // Push the product ID to the user's basket if it doesn't already exist
@@ -23,9 +23,8 @@ export const addProductToBasket = async (req: Request, res: Response) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    // Handle errors appropriately
     // @ts-ignore
-    return res.status(500).json({ error: "Failed to add product to basket: " + error.message });
+    return res.status(500).json({ message: "Failed to add product to basket" });
   }
 };
 
@@ -36,14 +35,14 @@ export const deleteItemFromBasket = async (req: Request, res: Response) => {
     const user = await getUserBySessionToken(currentUserToken);
 
     if (!user || !productId) {
-      throw new Error("User or product not found");
+      return res.status(404).json({ message: "User or Product Not Found" });
     }
 
     // Find the index of the product ID in the user's basket array
     const productIndex = user.basket.findIndex((item) => item.toString() === productId);
 
     if (productIndex === -1) {
-      return res.status(404).json({ error: "Product not found in the basket" });
+      return res.status(404).json({ message: "Product not found in the basket" });
     }
 
     // Remove the product ID from the basket array
@@ -52,9 +51,9 @@ export const deleteItemFromBasket = async (req: Request, res: Response) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    // Handle errors appropriately
     // @ts-ignore
-    return res.status(500).json({ error: "Failed to delete item from basket: " + error.message });
+    // Send an error response
+    return res.status(500).json({ message: "Failed to delete item from basket" });
   }
 };
 
@@ -64,6 +63,7 @@ export const addProductToShop = async (req: Request, res: Response) => {
     await createProduct(product);
     return res.status(200).json("Addition successful");
   } catch (error) {
+    // Send an error response
     console.log(error);
     return res.sendStatus(403);    
   }
@@ -72,9 +72,11 @@ export const addProductToShop = async (req: Request, res: Response) => {
 export const getAllProducts = async (_req: Request, res: Response) => {
   try {
     const products = await getProducts();
-    res.status(200).json(products); // Send the products in the response
+    // Send the products in the response
+    res.status(200).json(products); 
   } catch (error) {
+    // Send an error response
     console.log("Failed Fetching products: ", error);
-    res.status(500).send("Failed Fetching products"); // Send an error response
+    res.status(500).send("Failed Fetching products"); 
   }
 };

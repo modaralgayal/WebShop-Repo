@@ -10,20 +10,20 @@ export const login = async (req: Request, res: Response) => {
 
         if (!email || !password) {
             console.log('a field is missing');
-            return res.sendStatus(400);
+            return res.status(400).json({ message: 'A Field Is Missing'})
         }
 
         const user = await getUserByEmail(email).select('+authentication.salt +authentication.password');
 
         if (!user) {
             console.log('user does not exist');
-            return res.sendStatus(403);
+            return res.status(403).json({ message: 'user does not exist'});
         }
         const expectedHash = authenticate(user.authentication.salt, password);
         
         if (user.authentication.password !== expectedHash) {
             console.log('wrong password');
-            return res.sendStatus(403);
+            return res.status(403).json({ message: 'Wrong Password Try Again'});
         }
 
         const accessToken = signJWT({ email: user.email , name: user.username}, "1h");
@@ -38,7 +38,7 @@ export const login = async (req: Request, res: Response) => {
         
     } catch (error) {
         console.log(error);
-        return res.sendStatus(400);
+        return res.status(400);
     }
 };
 
@@ -47,13 +47,13 @@ export const register = async (req: Request, res: Response) => {
         const { email, username, password } = req.body;
         if (!email || !password || !username) {
             console.log('a field is missing');
-            return res.sendStatus(400);
+            return res.status(400).json({ message: "A Field Is Missing" })
         }
         const existingUser = await getUserByEmail(email);
         console.log(existingUser);
         if (existingUser) {
-            console.log('user already existis');
-            return res.sendStatus(403);
+            console.log('user already exists');
+            return res.status(403).json({ message: "User Already Exists" });
         }
         const salt = random();
         const user = await createUser({
@@ -68,15 +68,14 @@ export const register = async (req: Request, res: Response) => {
 
         return res.status(200).json(user).end();
     } catch (error) {
-        console.log(error);
-        return res.sendStatus(400);
-    }
+        console.error(error);
+        return res.status(500).json({ error });
+      }
 };
 
 export const logOut = async (_req: Request, res: Response) => {
     res.cookie("accessToken", "", {
         maxAge: 0
     });
-
     res.send({success: true});
 };

@@ -15,7 +15,8 @@ interface User extends Document {
 interface Product extends Document {
   name: String,
   price: Number,
-  icon: Buffer
+  category: String,
+  icon: String
 }
 
 const UserModel = model<User>("User", userSchema);

@@ -8,12 +8,13 @@ export const userSchema = new mongoose.Schema({
       salt: { type: String, select: false },
       sessionToken: {type: String, select: false}
     },
-    basket: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
+    basket: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product', select: true }]
 });
 
 export const productSchema = new mongoose.Schema({
     name: {type: String, required: true},
     price: {type: Number, required: true},
-    icon: {type: Buffer, required: false}
+    category: {type: String, required: true},
+    icon: {type: String, required: false}
 })
 

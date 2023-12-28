@@ -1,6 +1,7 @@
 export interface User {
     username: string;
-    email: string; 
+    email: string;
+    basket: Array<string | any>
 }
 
 export interface LoginValue {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import userService from '../Services/users';
-import { Form, Button } from 'react-bootstrap';
-
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -19,29 +19,39 @@ const Login = () => {
     };
     
     return (
-        <div>
-            <h2>login</h2>
-            <Form onSubmit={handleLogin}>
-                <Form.Group>
-                    <Form.Label>email:</Form.Label>
-                    <Form.Control
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>password:</Form.Label>
-                    <Form.Control
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    login
-                </Button>
-            </Form>
+        <div className="App Header d-flex justify-content-center align-items-center vh-100">
+            <Container>
+                <Row className="justify-content-center">
+                    <Col md={6}>
+                        <h2>Login</h2>
+                        <Form onSubmit={handleLogin}>
+                            <Form.Group>
+                                <Form.Label>Email:</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    value={email}
+                                    placeholder="example@email.com"
+                                    size='lg'
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Password:</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    value={password}
+                                    placeholder="password"
+                                    size='lg'
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Button variant="primary" type="submit">
+                                Login
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     )
 }

@@ -21,4 +21,8 @@ export const addProductToBasket = async (req: Request, res: Response) => {
       // @ts-ignore
       throw new Error("Failed to add product to basket: " + error.message);
     }
-  };
+};
+
+export const addProductToShop = async (req: Request, res: Response) => {
+  
+}

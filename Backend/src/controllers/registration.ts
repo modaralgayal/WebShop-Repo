@@ -74,8 +74,14 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const logOut = async (_req: Request, res: Response) => {
-    res.cookie("accessToken", "", {
-        maxAge: 0
-    });
-    res.send({success: true});
+    try {
+        res.cookie("accessToken", "", {
+            maxAge: 0
+        });
+        res.send({success: true});    
+    } catch (error) {
+        console.log(error)
+        res.status(403)
+    }
+    
 };

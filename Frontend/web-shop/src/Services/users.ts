@@ -38,7 +38,44 @@ const login = async (object: LoginValue) => {
   }
 };
 
+const logOut = async () => {
+  try {
+    const response = await axios.post(`${apiBaseUrl}/auth/logout`);
+    console.log('User Logged out',response.data)
+    return response.data; // Extract data from the response
+  } catch (error) {
+    console.log(error);
+    // Handle the error or return null/undefined if needed
+    return null;
+  }
+};
+
+const checkExistingUser = async () => {
+  try {
+    const response = await axios.get(`${apiBaseUrl}/`);
+    
+    // Check if the response contains the 'Set-Cookie' header
+    const setCookieHeader = response.headers;
+    console.log(setCookieHeader)
+    if (setCookieHeader) {
+      // The 'Set-Cookie' header exists, indicating the presence of a cookie
+      console.log('Access cookie exists:', setCookieHeader);
+      // You can further process the cookie information or take action accordingly
+    } else {
+      // There might not be any 'Set-Cookie' header in the response
+      console.log('No access cookie found in the response.');
+    }
+
+    // If you need to access the response data, you can do so like this:
+    // const responseData = response.data;
+    // Further actions based on the response data if needed
+  } catch (error: any) {
+    console.error('Error checking existing user:', error.response);
+  }
+};
+
+
 
 export default {
-    getAll, create, login
+    getAll, create, login, logOut, checkExistingUser
 }

@@ -39,3 +39,17 @@ export const isOwner = async (req: Request, res: Response, next: NextFunction) =
     return res.sendStatus(403);
   }
 };
+
+export const checkcookie = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const currentUserToken = req.cookies && typeof req.cookies.accessToken === 'string' ? req.cookies.accessToken : undefined;
+    
+    if (currentUserToken) {
+      console.log('User exists, logging out')
+      return next()
+    }
+  } catch (error) {
+    console.log('problem checking user', error)
+    return res.sendStatus(403)
+  }
+}

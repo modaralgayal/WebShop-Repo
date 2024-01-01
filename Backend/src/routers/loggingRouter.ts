@@ -10,11 +10,12 @@ const router = express.Router();
 // Creating a user and logging in
 router.post('/auth/register', register);
 router.post('/auth/login', login);
-router.delete('/', logOut);
+router.post('/auth/logout', logOut);
 
 // Retrieving user info
 router.get('/api/users', deserializeUser, getAll);
 router.get('/api/users/:id', getById);
+router.get('/checkcookie')
 
 // deleting a user
 router.delete('/api/users/:id', isOwner, deleteById);

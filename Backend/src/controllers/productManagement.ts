@@ -12,11 +12,6 @@ export const addProductToBasket = async (req: Request, res: Response) => {
     }
 
     // Check if the product ID already exists in the user's basket
-    const isProductAlreadyAdded = user.basket.some((item) => item.toString() === productId);
-    if (isProductAlreadyAdded) {
-      return res.status(400).json({ message: "Product already exists in the basket" });
-    }
-
     // Push the product ID to the user's basket if it doesn't already exist
     user.basket.push(productId);
     await user.save();

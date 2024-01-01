@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import productService from '../Services/products';
 import Product from './product';
+import "./shop.css"
 
-interface ProductInt {
-  id: string;
+interface ProductInt {  
+  _id: string;
   name: string;
   price: number;
   icon: string;
@@ -35,11 +36,10 @@ const Shop: React.FC = () => {
         {/* Render your products using the Product component */}
         {products.map((product) => (
           <Product
-          key={product.id}
-          name={product.name}
-          price={product.price}
-          imageFilename={product.icon}
-        />
+                id={product._id.toString()}
+                name={product.name}
+                price={product.price}
+                imageFilename={product.icon}         />
         ))}
       </div>
     </div>

@@ -24,6 +24,6 @@ router.delete('/api/users/:id', isOwner, deleteById);
 router.post('/api/products', addProductToShop);
 router.post('/products/:id', addProductToBasket);
 router.get('/api/products', getAllProducts);
-router.delete('/api/products/:id', deleteItemFromBasket);
+router.delete('/products/:id', deleteItemFromBasket);
 
 export default router;

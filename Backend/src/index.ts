@@ -14,6 +14,7 @@ app.use(cors());
 app.use(cookieParser());
 app.use('/', router);
 app.use(deserializeUser);
+app.use(express.static("/productPng"))
 
 const PORT = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URL;

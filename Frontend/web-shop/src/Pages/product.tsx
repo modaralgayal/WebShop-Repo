@@ -1,23 +1,41 @@
-import React from "react";
+import React from 'react';
+import userService from '../Services/users';
 
 interface ProductProps {
+  id: string; // Add the ID field to the ProductProps interface
   name: string;
   price: number;
   imageFilename: string;
 }
 
-const Product: React.FC<ProductProps> = ({ name, price, imageFilename }) => {
-  const path = `productPng/${imageFilename.toString()}`
-  console.log(path)
+const Product: React.FC<ProductProps> = ({ id, name, price, imageFilename }) => {
+  const handleAddingProduct = async () => {
+    try {
+      const response = await userService.addProductToBasket(id); // Pass the ID to the userService function
+      console.log(response)
+    } catch (error: any) {
+      console.log(error.response.data.message);
+      return error.response.data.message;
+    }
+  };
+
   return (
     <div className="product">
-      <h2>{name}</h2>
-      <p>{price}</p>
-      <img
-        src={path}
-        alt={name.toString()}
-      />
-      {/* Render other product details */}
+      <img src={`/productPng/${imageFilename}`} alt={name.toString()} />
+      <div className="description">
+        <p>
+          <b>{name}</b>
+        </p>
+        <p>
+          <b>€{price}</b>
+        </p>
+      </div>
+      <div>
+        {/* Pass the ID to handleAddingProduct */}
+        <button className="addToCartBttn" onClick={handleAddingProduct}>
+          Add To Cart
+        </button>
+      </div>
     </div>
   );
 };

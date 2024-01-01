@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { apiBaseUrl } from '../constants';
 
-export const getAll = async () => {
+const getAll = async () => {
     try {
         const response = await axios.get(`${apiBaseUrl}/api/products`);
         return response.data;
@@ -10,5 +10,6 @@ export const getAll = async () => {
         throw new Error('Failed to fetch Products');
       }
   };
-  
+
+export default { getAll }
   

@@ -1,16 +1,49 @@
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from 'react';
+import productService from '../Services/products';
+import Product from './product';
 
-export const Shop = () => {
-    return (
-        <h2>
-            This is the Shopping Center
-        <Link to={'/checkout'}>
-          <FontAwesomeIcon icon={faCartShopping} className="link" />
-        </Link>
+interface ProductInt {
+  id: string;
+  name: string;
+  price: number;
+  icon: string;
+  // Define other properties based on your product schema
+}
+const Shop: React.FC = () => {
+  const [products, setProducts] = useState<ProductInt[]>([]);
 
-        </h2>
-    );
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const fetchedProducts: ProductInt[] = await productService.getAll();
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []); // Run once on component mount
+
+  return (
+    <div className="shop">
+      <div className="shopTitle">
+        <h1> Modar's Shop </h1>
+      </div>
+
+      <div className="products">
+        {/* Render your products using the Product component */}
+        {products.map((product) => (
+          <Product
+          key={product.id}
+          name={product.name}
+          price={product.price}
+          imageFilename={product.icon}
+        />
+        ))}
+      </div>
+    </div>
+  );
 };
+
+export default Shop;

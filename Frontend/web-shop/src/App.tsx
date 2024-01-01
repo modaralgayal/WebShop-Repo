@@ -5,7 +5,7 @@ import {
 import { useContext } from 'react';
 import Login from './Pages/loginPage';
 import HomePage from './Pages/home';
-import { Shop } from './Pages/shop';
+import Shop from './Pages/shop';
 import { AuthContext } from './Services/authContext';
 import CreateUserForm from './Pages/register'
 import { Navbar } from './Components/navbar';

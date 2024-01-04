@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router'
 import { useToken } from '../Services/currentUser'
 import userService from '../Services/users'
 import productService from '../Services/products'
@@ -6,18 +7,22 @@ import { CartItem } from './cartItem'
 
 export const CheckOut = () => {
   const [productData, setProductData] = useState<{ [key: string]: any }>({})
-  const [cartItemChanged, setCartItemChanged] = useState(false) // New state to track changes
-
+  const [totalPrice, setTotalPrice] = useState<number>(0) // State to store the total price
+  const [cartItemChanged, setCartItemChanged] = useState<boolean>(false)
+  const navigate = useNavigate()
   const { token } = useToken()
 
   const handleCartItemChanged = () => {
-    setCartItemChanged(prevState => !prevState) // Trigger a change in CheckOut component
+    setCartItemChanged(prevState => !prevState)
+  }
+
+  const handleGoToCheckout = () => {
+    navigate(`/payment/${totalPrice}`) // Navigate to "/payment" with totalPrice as a parameter
   }
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        console.log('Running')
         const response = await userService.currentUserInfo(token)
         const basket = response.basket || []
 
@@ -50,6 +55,18 @@ export const CheckOut = () => {
           {},
         )
 
+        // Calculate the total price considering the quantity of each item
+        const total = Object.values(basketWithData).reduce(
+          (acc: number, product: any) => {
+            const price = product.price || 0
+            const quantity = product.count || 0
+            return acc + price * quantity
+          },
+          0,
+        )
+
+        setTotalPrice(total) // Update the total price state
+
         setProductData(basketWithData)
       } catch (error) {
         console.error('Error fetching user info:', error)
@@ -57,20 +74,26 @@ export const CheckOut = () => {
     }
 
     fetchCurrentUser()
-  }, [cartItemChanged]) // Include cartItemChanged in the dependency array
+  }, [cartItemChanged])
 
   return (
     <div className="cart">
       <h2>Your Items</h2>
       <ul>
-        {Object.entries(productData).map(([productId, productDetails]: any) => (
-          <CartItem
-            key={productId}
-            data={productDetails}
-            onCartItemChanged={handleCartItemChanged}
-          />
-        ))}
+        {Object.entries(productData).map(
+          ([productId, productDetails]: [string, any]) => (
+            <CartItem
+              key={productId}
+              data={productDetails}
+              onCartItemChanged={handleCartItemChanged}
+            />
+          ),
+        )}
       </ul>
+      <p>Total Price: €{totalPrice.toFixed(2)}</p>
+      <button className="CheckoutButton" onClick={handleGoToCheckout}>
+        Go to Checkout
+      </button>
     </div>
   )
 }

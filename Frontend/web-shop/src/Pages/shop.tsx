@@ -1,30 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import productService from '../Services/products';
-import Product from './product';
-import "./shop.css"
+import React, { useState, useEffect, useContext } from 'react'
+import productService from '../Services/products'
+import Product from './product'
+import './shop.css'
+import { AuthContext } from '../Services/authContext'
 
-interface ProductInt {  
-  _id: string;
-  name: string;
-  price: number;
-  icon: string;
-  // Define other properties based on your product schema
+interface ProductInt {
+  _id: string
+  name: string
+  price: number
+  icon: string
 }
+
 const Shop: React.FC = () => {
-  const [products, setProducts] = useState<ProductInt[]>([]);
+  const [products, setProducts] = useState<ProductInt[]>([])
+  const { isLoggedIn, logout } = useContext(AuthContext)
+
+  console.log('Checking in shop', isLoggedIn)
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const fetchedProducts: ProductInt[] = await productService.getAll();
-        setProducts(fetchedProducts);
+        const fetchedProducts: ProductInt[] = await productService.getAll()
+        setProducts(fetchedProducts)
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error fetching products:', error)
       }
-    };
+    }
 
-    fetchProducts();
-  }, []); // Run once on component mount
+    fetchProducts()
+  }, [])
 
   return (
     <div className="shop">
@@ -34,16 +38,17 @@ const Shop: React.FC = () => {
 
       <div className="products">
         {/* Render your products using the Product component */}
-        {products.map((product) => (
+        {products.map(product => (
           <Product
-                id={product._id.toString()}
-                name={product.name}
-                price={product.price}
-                imageFilename={product.icon}         />
+            id={product._id.toString()}
+            name={product.name}
+            price={product.price}
+            imageFilename={product.icon}
+          />
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Shop;
+export default Shop

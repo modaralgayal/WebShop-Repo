@@ -1,11 +1,17 @@
-import { Request, Response } from 'express';
-import { createProduct, getProducts, getUserBySessionToken } from '../types/schemas';
+import { Request, Response } from "express";
+import {
+  createProduct,
+  getProducts,
+  getUserBySessionToken,
+} from "../types/schemas";
 
 export const addProductToBasket = async (req: Request, res: Response) => {
   try {
     const productId = req.params.id;
-    const currentUserToken = req.cookies && typeof req.cookies.accessToken === 'string' ? req.cookies.accessToken : undefined;
+    const currentUserToken = req.body.userToken;
+    console.log(currentUserToken);
     const user = await getUserBySessionToken(currentUserToken);
+    console.log("Adding product to user: ", user);
 
     if (!user || !productId) {
       return res.status(404).json({ message: "User or Product Not Found" });
@@ -26,7 +32,12 @@ export const addProductToBasket = async (req: Request, res: Response) => {
 export const deleteItemFromBasket = async (req: Request, res: Response) => {
   try {
     const productId = req.params.id;
-    const currentUserToken = req.cookies && typeof req.cookies.accessToken === 'string' ? req.cookies.accessToken : undefined;
+    const currentUserToken = req.headers.authorization as string | undefined;
+
+    if (!currentUserToken) {
+      throw new Error("Token not Found");
+    }
+
     const user = await getUserBySessionToken(currentUserToken);
 
     if (!user || !productId) {
@@ -34,10 +45,14 @@ export const deleteItemFromBasket = async (req: Request, res: Response) => {
     }
 
     // Find the index of the product ID in the user's basket array
-    const productIndex = user.basket.findIndex((item) => item.toString() === productId);
+    const productIndex = user.basket.findIndex(
+      (item) => item.toString() === productId,
+    );
 
     if (productIndex === -1) {
-      return res.status(404).json({ message: "Product not found in the basket" });
+      return res
+        .status(404)
+        .json({ message: "Product not found in the basket" });
     }
 
     // Remove the product ID from the basket array
@@ -48,7 +63,9 @@ export const deleteItemFromBasket = async (req: Request, res: Response) => {
   } catch (error) {
     // @ts-ignore
     // Send an error response
-    return res.status(500).json({ message: "Failed to delete item from basket" });
+    return res
+      .status(500)
+      .json({ message: "Failed to delete item from basket" });
   }
 };
 
@@ -60,7 +77,7 @@ export const addProductToShop = async (req: Request, res: Response) => {
   } catch (error) {
     // Send an error response
     console.log(error);
-    return res.sendStatus(403);    
+    return res.sendStatus(403);
   }
 };
 
@@ -68,10 +85,10 @@ export const getAllProducts = async (_req: Request, res: Response) => {
   try {
     const products = await getProducts();
     // Send the products in the response
-    res.status(200).json(products); 
+    res.status(200).json(products);
   } catch (error) {
     // Send an error response
     console.log("Failed Fetching products: ", error);
-    res.status(500).send("Failed Fetching products"); 
+    res.status(500).send("Failed Fetching products");
   }
 };

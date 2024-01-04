@@ -1,23 +1,31 @@
-import React from 'react';
-import userService from '../Services/users';
+import React from 'react'
+import userService from '../Services/users'
+import { useToken } from '../Services/currentUser'
 
 interface ProductProps {
-  id: string; // Add the ID field to the ProductProps interface
-  name: string;
-  price: number;
-  imageFilename: string;
+  id: string // Add the ID field to the ProductProps interface
+  name: string
+  price: number
+  imageFilename: string
 }
 
-const Product: React.FC<ProductProps> = ({ id, name, price, imageFilename }) => {
+const Product: React.FC<ProductProps> = ({
+  id,
+  name,
+  price,
+  imageFilename,
+}) => {
+  const { token } = useToken()
+
   const handleAddingProduct = async () => {
     try {
-      const response = await userService.addProductToBasket(id); // Pass the ID to the userService function
+      const response = await userService.addProductToBasket(id, token) // Pass the ID to the userService function
       console.log(response)
     } catch (error: any) {
-      console.log(error.response.data.message);
-      return error.response.data.message;
+      console.log(error.response.data.message)
+      return error.response.data.message
     }
-  };
+  }
 
   return (
     <div className="product">
@@ -37,7 +45,7 @@ const Product: React.FC<ProductProps> = ({ id, name, price, imageFilename }) => 
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product

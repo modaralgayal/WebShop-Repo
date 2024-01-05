@@ -10,7 +10,6 @@ import { AuthProvider } from './Services/authContext'
 import { TokenProvider } from './Services/currentUser'
 import { CheckOut } from './Pages/checkout'
 import AuthenticationWrapper from './Components/authenticationwrapper'
-import { StripeContainer } from './Components/StripeContainer'
 
 const App = () => {
   const { isLoggedIn } = useContext(AuthContext)
@@ -37,10 +36,6 @@ const App = () => {
               <Route path="/auth/register" element={<CreateUserForm />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/checkout" element={<CheckOut />} />
-              <Route
-                path="/payment/:totalAmount"
-                element={<StripeContainer />}
-              />
             </Routes>
           </AuthenticationWrapper>
         </Router>

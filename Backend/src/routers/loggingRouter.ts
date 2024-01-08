@@ -14,6 +14,7 @@ import {
   getAllProducts,
 } from "../controllers/productManagement";
 import { deserializeUser } from "../middleware/deserializeuser";
+import { Configure, PaymentIntent } from "../controllers/paymentManagement";
 
 const router = express.Router();
 
@@ -35,5 +36,9 @@ router.post("/api/products", addProductToShop);
 router.post("/products/:id", addProductToBasket);
 router.get("/api/products", getAllProducts);
 router.delete("/products/:id", deleteItemFromBasket);
+
+// Payment Handlers
+router.get("/config", Configure);
+router.post("/create-payment-intent", PaymentIntent);
 
 export default router;

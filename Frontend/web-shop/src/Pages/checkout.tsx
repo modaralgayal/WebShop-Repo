@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useToken } from '../Services/currentUser'
 import userService from '../Services/users'
 import productService from '../Services/products'
-import { CartItem } from './cartItem'
+import { CartItem } from '../Components/cartItem'
 
 export const CheckOut = () => {
   const [productData, setProductData] = useState<{ [key: string]: any }>({})
@@ -17,7 +17,7 @@ export const CheckOut = () => {
   }
 
   const handleGoToCheckout = () => {
-    navigate(`/payment/${totalPrice}`) // Navigate to "/payment" with totalPrice as a parameter
+    navigate('/payment', { state: { totalPrice } }); // Navigate to "/payment" with totalPrice as a parameter
   }
 
   useEffect(() => {

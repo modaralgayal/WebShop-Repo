@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import productService from '../Services/products'
-import Product from './product'
+import Product from '../Components/product'
 import './shop.css'
 import { AuthContext } from '../Services/authContext'
 

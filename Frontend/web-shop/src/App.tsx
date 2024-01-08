@@ -9,6 +9,7 @@ import { Navbar } from './Components/navbar'
 import { AuthProvider } from './Services/authContext'
 import { TokenProvider } from './Services/currentUser'
 import { CheckOut } from './Pages/checkout'
+import { Payment } from './stripeComponents/payment'
 import AuthenticationWrapper from './Components/authenticationwrapper'
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
               <Route path="/auth/register" element={<CreateUserForm />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/checkout" element={<CheckOut />} />
+              <Route path="/payment" element={<Payment />} />
             </Routes>
           </AuthenticationWrapper>
         </Router>

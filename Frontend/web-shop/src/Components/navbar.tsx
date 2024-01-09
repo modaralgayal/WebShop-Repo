@@ -1,10 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../navbar.css'
-import {
-  faCartShopping,
-  faCog,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../Services/authContext'
@@ -31,14 +27,6 @@ export const Navbar = () => {
           <>
             <Link to="/checkout">
               <FontAwesomeIcon icon={faCartShopping} className="icon" />
-            </Link>
-
-            <Link to={''}>
-              <FontAwesomeIcon icon={faUser} className="icon" />
-            </Link>
-
-            <Link to={''}>
-              <FontAwesomeIcon icon={faCog} className="icon" />
             </Link>
 
             <Button variant="primary" onClick={handleLogOut}>

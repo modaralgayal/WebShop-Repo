@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProductModel = exports.UserModel = exports.updateProductById = exports.createProduct = exports.getProductById = exports.getProducts = exports.updateUserById = exports.deleteUserById = exports.createUser = exports.getUserById = exports.getUserBySessionToken = exports.getUserByEmail = exports.getUsers = void 0;
+const mongoose_1 = require("mongoose");
+const models_1 = require("../models/models");
+const UserModel = (0, mongoose_1.model)("User", models_1.userSchema);
+exports.UserModel = UserModel;
+const getUsers = () => UserModel.find();
+exports.getUsers = getUsers;
+const getUserByEmail = (email) => UserModel.findOne({ email });
+exports.getUserByEmail = getUserByEmail;
+const getUserBySessionToken = (sessionToken) => UserModel.findOne({
+    "authentication.sessionToken": sessionToken,
+}).select("+authentication.sessionToken");
+exports.getUserBySessionToken = getUserBySessionToken;
+const getUserById = (id) => UserModel.findById(id);
+exports.getUserById = getUserById;
+const createUser = (values) => new UserModel(values).save().then((user) => user.toObject());
+exports.createUser = createUser;
+const deleteUserById = (id) => UserModel.findOneAndDelete({ _id: id });
+exports.deleteUserById = deleteUserById;
+const updateUserById = (id, values) => UserModel.findByIdAndUpdate(id, values);
+exports.updateUserById = updateUserById;
+const ProductModel = (0, mongoose_1.model)("Product", models_1.productSchema);
+exports.ProductModel = ProductModel;
+const getProducts = () => ProductModel.find();
+exports.getProducts = getProducts;
+const getProductById = (id) => ProductModel.findById(id);
+exports.getProductById = getProductById;
+const createProduct = (values) => new ProductModel(values).save().then((product) => product.toObject());
+exports.createProduct = createProduct;
+const updateProductById = (id, values) => UserModel.findByIdAndUpdate(id, values);
+exports.updateProductById = updateProductById;

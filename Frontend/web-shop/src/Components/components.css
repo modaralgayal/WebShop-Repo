@@ -38,7 +38,7 @@
 }
 
 /* Style for the button */
-.paymentButton {
+.checkoutButton {
   display: block;
   margin-top: 30px; /* Adjust top margin for button */
   width: 100%;
@@ -56,8 +56,8 @@
 }
 
 /* Adjust button styles on hover/active */
-.paymentButton:hover,
-.paymentButton:active {
+.checkoutButton:hover,
+.checkoutButton:active {
   background-color: #222;
   box-shadow:
     0 6px 9px rgba(50, 50, 93, 0.06),

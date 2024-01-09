@@ -5,6 +5,7 @@ import './cart.css'
 
 export const CartItem = (props: any) => {
   const { data, onCartItemChanged } = props // Destructure 'data' and 'onCartItemChanged' from props
+  // @ts-ignore
   const { _id, category, count, icon, name, price } = data // Destructure 'data' object
   const { token } = useToken()
 

@@ -4,6 +4,7 @@ import { useToken } from '../Services/currentUser'
 import userService from '../Services/users'
 import productService from '../Services/products'
 import { CartItem } from '../Components/cartItem'
+import "../Components/cart.css"
 
 export const CheckOut = () => {
   const [productData, setProductData] = useState<{ [key: string]: any }>({})

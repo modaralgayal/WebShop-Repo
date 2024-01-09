@@ -13,6 +13,7 @@ interface ProductInt {
 
 const Shop: React.FC = () => {
   const [products, setProducts] = useState<ProductInt[]>([])
+  // @ts-ignore
   const { isLoggedIn, logout } = useContext(AuthContext)
 
   console.log('Checking in shop', isLoggedIn)

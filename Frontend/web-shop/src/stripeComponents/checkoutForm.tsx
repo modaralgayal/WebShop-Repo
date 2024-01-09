@@ -11,7 +11,6 @@ export const CheckoutForm = () => {
   const [message, setMessage] = useState<string | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
 
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -29,9 +28,9 @@ export const CheckoutForm = () => {
     const { error } = await stripe.confirmCardPayment({
       element,
       confirmParams: {
-        return_url: `${apiBaseUrl}/completion`
-      }
-    });
+        return_url: `${apiBaseUrl}/completion`,
+      },
+    })
 
     if (error?.type === 'card_error' || error?.type === 'validation_error') {
       // Check if error.message is defined before updating the state

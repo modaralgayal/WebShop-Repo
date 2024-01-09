@@ -34,8 +34,8 @@ export const login = async (req: Request, res: Response) => {
     user.authentication.sessionToken = accessToken;
 
     res.cookie("accessToken", accessToken, {
-      maxAge: 30000, // Cookie expiration time in milliseconds
-      httpOnly: true, // Restricts cookie access to HTTP(S) requests
+      maxAge: 30000, 
+      httpOnly: true, 
     });
     await user.save();
     console.log(user);

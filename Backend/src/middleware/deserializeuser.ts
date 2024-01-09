@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { verifyJWT } from "../utils/jwt.utils";
+import { verifyJWT } from "../utils/jwt";
 
 export function deserializeUser(
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   const { accessToken } = req.cookies;
   // console.log(accessToken)

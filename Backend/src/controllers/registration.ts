@@ -1,6 +1,6 @@
 import { createUser, getUserByEmail } from "../types/schemas";
 import { random, authenticate } from "../helpers/randomizers";
-import { signJWT } from "../utils/jwt.utils";
+import { signJWT } from "../utils/jwt";
 import { Request, Response } from "express";
 
 export const login = async (req: Request, res: Response) => {
@@ -13,7 +13,7 @@ export const login = async (req: Request, res: Response) => {
     }
 
     const user = await getUserByEmail(email).select(
-      "+authentication.salt +authentication.password",
+      "+authentication.salt +authentication.password"
     );
 
     if (!user) {
@@ -29,7 +29,7 @@ export const login = async (req: Request, res: Response) => {
 
     const accessToken = signJWT(
       { email: user.email, name: user.username },
-      "1h",
+      "1h"
     );
     user.authentication.sessionToken = accessToken;
 

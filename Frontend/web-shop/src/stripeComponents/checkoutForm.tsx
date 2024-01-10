@@ -20,28 +20,26 @@ export const CheckoutForm = () => {
 
     setIsProcessing(true)
 
-    const element = elements._commonOptions.clientSecret
+    const element = elements._commonOptions.clientSecret.clientSecret.toString()
 
-    console.log(elements._commonOptions.clientSecret)
+    console.log("This is the clientSecret",elements._commonOptions.clientSecret.clientSecret)
 
     // @ts-ignore
-    const { error } = await stripe.confirmCardPayment({
-      element,
+    const { error } = await stripe.confirmPayment({
+      elements,
       confirmParams: {
-        return_url: `${apiBaseUrl}/completion`,
+        return_url: `${apiBaseUrl}/completion`, 
       },
     })
 
-    if (error?.type === 'card_error' || error?.type === 'validation_error') {
-      // Check if error.message is defined before updating the state
-      if (error.message !== undefined) {
-        setMessage(error.message)
-      } else {
-        setMessage('An unexpected error occurred.')
-      }
-    } else {
-      setMessage('An unexpected error occurred.')
-    }
+    console.log("This is the paymentIntent", error)
+
+    if (error) {
+      console.error('Stripe API error:', error);
+      if (error.type === 'card_error' || error.type === 'validation_error') {
+        setMessage(error.message || 'An unexpected error occurred.');
+      } 
+    } 
 
     setIsProcessing(false)
   }

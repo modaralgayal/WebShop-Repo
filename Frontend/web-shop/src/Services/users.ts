@@ -38,7 +38,7 @@ const login = async (object: LoginValue) => {
     return data
   } catch (error: any) {
     // Handle error
-    console.error('Error during login:', error.response.data.message)
+    console.error('Error during login:', error)
     throw new Error(error.response.data.message)
   }
 }

@@ -20,8 +20,6 @@ export const CheckoutForm = () => {
 
     setIsProcessing(true)
 
-    const element = elements._commonOptions.clientSecret.clientSecret.toString()
-
     console.log("This is the clientSecret",elements._commonOptions.clientSecret.clientSecret)
 
     // @ts-ignore

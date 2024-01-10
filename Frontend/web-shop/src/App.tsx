@@ -11,6 +11,7 @@ import { TokenProvider } from './Services/currentUser'
 import { CheckOut } from './Pages/checkout'
 import { Payment } from './stripeComponents/payment'
 import AuthenticationWrapper from './Components/authenticationwrapper'
+import { Completion } from './stripeComponents/completion'
 
 const App = () => {
   const { isLoggedIn } = useContext(AuthContext)
@@ -30,6 +31,7 @@ const App = () => {
               <Link to="/shop"></Link>
               <Link to="/checkout"></Link>
               <Link to="/payment"></Link>
+              <Link to="/completion"></Link>
             </div>
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -38,6 +40,8 @@ const App = () => {
               <Route path="/shop" element={<Shop />} />
               <Route path="/checkout" element={<CheckOut />} />
               <Route path="/payment" element={<Payment />} />
+              <Route path="/completion" element={<Completion />} />
+
             </Routes>
           </AuthenticationWrapper>
         </Router>

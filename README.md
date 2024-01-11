@@ -15,6 +15,8 @@ using **Typescript** with many libraries required.
 
 * The Frontend and the Backend communicate via API.
 
+* The App uses Stripe Card Payment in the checkout process, the app itself is always in test mode. The payment works with the card `4242424242424242` (any future date and 3 digits.)
+
 ### Libraries used
 
 * Express, React, Jsonwebtoken, Mongoose, React-Router-Dom, FontAwsome, Flaticon, Cypress...  

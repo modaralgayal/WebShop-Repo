@@ -19,7 +19,7 @@ using **Typescript** with many libraries required.
 
 ### Libraries used
 
-* Express, React, Jsonwebtoken, Mongoose, React-Router-Dom, FontAwsome, Flaticon, Cypress...  
+* Express, React, Jsonwebtoken, Mongoose, Stripe, React-Router-Dom, FontAwsome, Flaticon, Cypress...  
 
 I won't be listing all.
 

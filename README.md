@@ -1,7 +1,7 @@
 # FullStack Makeshift Web Shop
 
 This is my webshop App where I demonstrate my skills in creating a functional website
-using typescript with many libraries required.
+using **Typescript** with many libraries required.
 
 ### Description of Structure
 

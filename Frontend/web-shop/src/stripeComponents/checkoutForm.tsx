@@ -2,6 +2,7 @@ import { PaymentElement } from '@stripe/react-stripe-js'
 import { useState, FormEvent } from 'react'
 import { useStripe, useElements } from '@stripe/react-stripe-js'
 import './payments.css'
+import { apiBaseUrl } from '../constants'
 
 export const CheckoutForm = () => {
   const stripe = useStripe()
@@ -25,7 +26,7 @@ export const CheckoutForm = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `http://localhost:5173/completion`, 
+        return_url: `${apiBaseUrl}/completion`, 
       },
     })
 

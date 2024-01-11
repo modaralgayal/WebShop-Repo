@@ -17,7 +17,7 @@ using **Typescript** with many libraries required.
 
 ### Libraries used
 
-* Express, React, Jsonwebtoken, Mongoose, React-Router-Dom, FontAwsome, Flaticon...  
+* Express, React, Jsonwebtoken, Mongoose, React-Router-Dom, FontAwsome, Flaticon, Cypress...  
 
 I won't be listing all.
 
@@ -33,6 +33,8 @@ I won't be listing all.
 * run `npm run build`
 
 * run `npm run dev`
+
+* To run the End to End tests run `npm run cypress:open`
 
 
 ### If you don't wish to clone the repository

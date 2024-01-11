@@ -45,4 +45,4 @@ I won't be listing all.
 
 ### Flaticon Art Credits:
 
-[References for the icon art in the site](./Frontend/references.md)
+* [References for the icon art in the site](./Frontend/references.md)

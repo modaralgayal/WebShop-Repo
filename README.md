@@ -17,7 +17,9 @@ using typescript with many libraries required.
 
 ### Libraries used
 
-* Express, React, Jsonwebtoken, Mongoose, React-Router-Dom, FontAwsome, Flaticon I won't be listing all.
+* Express, React, Jsonwebtoken, Mongoose, React-Router-Dom, FontAwsome, Flaticon...  
+
+I won't be listing all.
 
 
 #### Download Intructions
@@ -33,6 +35,6 @@ using typescript with many libraries required.
 * run `npm run dev`
 
 
-### Flaticon Art References:
+### Flaticon Art Credits:
 
 [References for the icon art in the site](./Frontend/references.md)

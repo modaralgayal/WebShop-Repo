@@ -35,6 +35,12 @@ I won't be listing all.
 * run `npm run dev`
 
 
+### If you don't wish to clone the repository
+
+* [Watch a demo of how the app works here](https://www.youtube.com/watch?v=14FIEzEQGaM&ab_channel=ModarAlGayal)
+
+
+
 ### Flaticon Art Credits:
 
 [References for the icon art in the site](./Frontend/references.md)

@@ -26,7 +26,7 @@ export const Navbar = () => {
         {isLoggedIn && (
           <>
             <Link to="/checkout">
-              <FontAwesomeIcon icon={faCartShopping} className="icon" />
+              <FontAwesomeIcon icon={faCartShopping} className="icon" id="shopping cart" />
             </Link>
 
             <Button variant="primary" onClick={handleLogOut}>

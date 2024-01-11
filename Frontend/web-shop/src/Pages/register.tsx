@@ -46,6 +46,7 @@ const CreateUserForm = () => {
               <Form.Group controlId="formEmail">
                 <Form.Label>Email:</Form.Label>
                 <Form.Control
+                  id="email"
                   type="email"
                   placeholder="Enter email"
                   value={email}
@@ -55,6 +56,7 @@ const CreateUserForm = () => {
               <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
                 <Form.Control
+                  id="username"
                   type="text"
                   placeholder="Enter username"
                   value={username}
@@ -64,6 +66,7 @@ const CreateUserForm = () => {
               <Form.Group controlId="formPassword">
                 <Form.Label>Password:</Form.Label>
                 <Form.Control
+                  id="password"
                   type="password"
                   placeholder="Enter password"
                   value={password}

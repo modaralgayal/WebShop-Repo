@@ -71,6 +71,7 @@ const Login = () => {
               <Form.Group>
                 <Form.Label>Email:</Form.Label>
                 <Form.Control
+                  id="email"
                   type="email"
                   value={email}
                   placeholder="example@email.com"
@@ -81,6 +82,7 @@ const Login = () => {
               <Form.Group>
                 <Form.Label>Password:</Form.Label>
                 <Form.Control
+                  id="password"
                   type="password"
                   value={password}
                   placeholder="password"
@@ -96,7 +98,7 @@ const Login = () => {
                 </Row>
               )}
               <Button variant="primary" type="submit" onClick={handleLogin}>
-                Login
+                Log In
               </Button>
             </Form>
           </Col>

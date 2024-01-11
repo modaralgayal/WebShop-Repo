@@ -39,8 +39,8 @@ const Product: React.FC<ProductProps> = ({
         </p>
       </div>
       <div>
-        {/* Pass the ID to handleAddingProduct */}
-        <button className="addToCartBttn" onClick={handleAddingProduct}>
+        
+        <button id={name} className="addToCartBttn" onClick={handleAddingProduct}>
           Add To Cart
         </button>
       </div>

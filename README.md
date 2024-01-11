@@ -35,4 +35,4 @@ using typescript with many libraries required.
 
 ### Flaticon Art References:
 
-[References for the icon art in the site](./Frontend/web-shop/references.html)
+[References for the icon art in the site](./Frontend/web-shop/references.md)

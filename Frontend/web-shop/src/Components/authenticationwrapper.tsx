@@ -14,7 +14,8 @@ const AuthenticationWrapper = ({ children }: any) => {
       if (
         location.pathname !== '/auth/login' &&
         location.pathname !== '/auth/register' &&
-        location.pathname !== '/'
+        location.pathname !== '/' &&
+        location.pathname !== '/completion'
       ) {
         userService.logOut()
         logout()

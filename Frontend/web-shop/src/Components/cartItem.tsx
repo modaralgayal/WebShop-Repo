@@ -4,9 +4,9 @@ import userService from '../Services/users'
 import './cart.css'
 
 export const CartItem = (props: any) => {
-  const { data, onCartItemChanged } = props // Destructure 'data' and 'onCartItemChanged' from props
+  const { data, onCartItemChanged } = props
   // @ts-ignore
-  const { _id, category, count, icon, name, price } = data // Destructure 'data' object
+  const { _id, category, count, icon, name, price } = data
   const { token } = useToken()
 
   const [inputValue, setInputValue] = useState(count)

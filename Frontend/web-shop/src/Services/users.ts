@@ -22,22 +22,18 @@ const create = async (object: CreatorValues) => {
       object,
     )
     console.log(data)
-    return data // Return data upon success
+    return data 
   } catch (error: any) {
-    // Handle error
     console.error('Error during user creation:', error.response.data.message)
     throw new Error(error.response.data.message)
   }
 }
 
 const login = async (object: LoginValue) => {
-  //console.log(object)
   try {
     const { data } = await axios.post(`${apiBaseUrl}/auth/login`, object)
-    //console.log(data)
     return data
   } catch (error: any) {
-    // Handle error
     console.error('Error during login:', error)
     throw new Error(error.response.data.message)
   }
@@ -47,10 +43,9 @@ const logOut = async () => {
   try {
     const response = await axios.delete(`${apiBaseUrl}/auth/logout`)
     console.log('User Logged out', response.data)
-    return response.data // Extract data from the response
+    return response.data
   } catch (error) {
     console.log(error)
-    // Handle the error or return null/undefined if needed
     return null
   }
 }
@@ -59,7 +54,7 @@ const addProductToBasket = async (productId: string, userToken: string) => {
   try {
     const response = await axios.post(
       `${apiBaseUrl}/products/${productId}`,
-      { userToken: userToken }, // Include userToken in the request body
+      { userToken: userToken },
     )
     return response.data
   } catch (error: any) {
@@ -75,7 +70,7 @@ const deleteProductFromBasket = async (
   try {
     const response = await axios.delete(`${apiBaseUrl}/products/${productId}`, {
       headers: {
-        Authorization: `${userToken}`, // Set the user token in the Authorization header
+        Authorization: `${userToken}`,
       },
     })
     return response.data
@@ -89,7 +84,7 @@ const currentUserInfo = async (userToken: string) => {
   try {
     const response = await axios.get(`${apiBaseUrl}/auth/user`, {
       headers: {
-        Authorization: `${userToken}`, // Set the user token in the Authorization header
+        Authorization: `${userToken}`,
       },
     })
     return response.data

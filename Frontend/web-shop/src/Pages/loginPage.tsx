@@ -21,7 +21,6 @@ const Login = () => {
         'check inside it if its going at the wrong time, true expected:',
         isLoggedIn,
       )
-      // Log out the user when they navigate to the login page while logged in
       console.log('Logging out user')
       userService.logOut()
       clearToken()
@@ -35,7 +34,7 @@ const Login = () => {
     if (caughtError) {
       timer = setTimeout(() => {
         setError('')
-      }, 7500) // 7.5 seconds
+      }, 7500)
     }
 
     return () => {
@@ -52,7 +51,6 @@ const Login = () => {
       setAuthToken(userToken)
       login()
       console.log(userToken)
-      // console.log(isLoggedIn)
       console.log('Logged in:', user)
       return navigate('/shop')
     } catch (error: any) {

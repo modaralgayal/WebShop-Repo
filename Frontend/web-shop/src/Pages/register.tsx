@@ -13,7 +13,7 @@ const CreateUserForm = () => {
     if (caughtError) {
       timer = setTimeout(() => {
         setError('')
-      }, 7500) // 7.5 seconds
+      }, 7500) 
     }
 
     return () => {
@@ -25,7 +25,6 @@ const CreateUserForm = () => {
     e.preventDefault()
     try {
       await userService.create({ email, username, password })
-      // Reset form fields after submission
       console.log('trying to create')
       setEmail('')
       setUsername('')

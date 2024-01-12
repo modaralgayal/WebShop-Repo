@@ -8,8 +8,8 @@ import { Request, Response } from "express";
 
 export const getAll = async (_req: Request, res: Response) => {
   try {
-    const userData = await getUsers(); // Assuming getUsers is an asynchronous function fetching user data
-    res.status(200).json(userData); // Sending the user data as JSON in the response
+    const userData = await getUsers();
+    res.status(200).json(userData);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch user data" });
   }

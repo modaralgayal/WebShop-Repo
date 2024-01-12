@@ -3,7 +3,7 @@ import userService from '../Services/users'
 import { useToken } from '../Services/currentUser'
 
 interface ProductProps {
-  id: string // Add the ID field to the ProductProps interface
+  id: string
   name: string
   price: number
   imageFilename: string
@@ -19,7 +19,7 @@ const Product: React.FC<ProductProps> = ({
 
   const handleAddingProduct = async () => {
     try {
-      const response = await userService.addProductToBasket(id, token) // Pass the ID to the userService function
+      const response = await userService.addProductToBasket(id, token)
       console.log(response)
     } catch (error: any) {
       console.log(error.response.data.message)

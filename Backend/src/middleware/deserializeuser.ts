@@ -7,7 +7,6 @@ export function deserializeUser(
   next: NextFunction
 ) {
   const { accessToken } = req.cookies;
-  // console.log(accessToken)
   if (!accessToken) {
     console.log("AccessToken Not Found");
     return res.sendStatus(403);

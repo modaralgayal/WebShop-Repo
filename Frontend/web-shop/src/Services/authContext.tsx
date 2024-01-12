@@ -22,12 +22,10 @@ export const AuthProvider = ({ children }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
   const login = () => {
-    // Implement your login logic
     setIsLoggedIn(true)
   }
 
   const logout = () => {
-    // Implement your logout logic
     setIsLoggedIn(false)
   }
 

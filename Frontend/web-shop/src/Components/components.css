@@ -1,48 +1,41 @@
-/* Center the form and adjust colors */
-
-/* Adjust margins and styles for the form */
 .FormGroup {
-  margin: 50px auto; /* Center the form horizontally and provide top margin */
+  margin: 50px auto;
   padding: 20px;
   border: none;
-  background-color: grey; /* Orange background */
+  background-color: grey;
   box-shadow:
     0 6px 9px rgba(50, 50, 93, 0.06),
     0 2px 5px rgba(0, 0, 0, 0.08),
     inset 0 1px 0 black;
   border-radius: 8px;
-  max-width: 400px; /* Limit the maximum width of the form */
-  width: 100%; /* Set width to 100% to make it responsive within the max-width */
-  margin-left: auto; /* Center the form horizontally */
-  margin-right: auto; /* Center the form horizontally */
+  max-width: 400px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Style for form rows */
 .FormRow {
   display: flex;
   align-items: center;
-  margin-top: 15px; /* Add margin between rows */
-  border-top: 1px solid #000; /* Black border top */
+  margin-top: 15px;
+  border-top: 1px solid #000;
 }
 
-/* Adjust autofill styles */
 .StripeElement--webkit-autofill {
   background: transparent !important;
 }
 
-/* Style for Stripe Element */
 .StripeElement {
   width: 100%;
   padding: 11px 15px;
   border: none;
 }
 
-/* Style for the button */
 .checkoutButton {
   display: block;
-  margin-top: 30px; /* Adjust top margin for button */
+  margin-top: 30px;
   width: 100%;
-  max-width: 400px; /* Limit the maximum width of the button */
+  max-width: 400px;
   height: 40px;
   background-color: #000;
   border: none;
@@ -51,11 +44,10 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 100ms ease-in-out;
-  margin-left: auto; /* Center the button horizontally */
-  margin-right: auto; /* Center the button horizontally */
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Adjust button styles on hover/active */
 .checkoutButton:hover,
 .checkoutButton:active {
   background-color: #222;
@@ -65,20 +57,17 @@
     inset 0 1px 0 black;
   transform: scale(0.98);
 }
-/* Adjust other styles */
+
 .App {
-  margin: 5% auto; /* Center the form horizontally and vertically */
-  max-width: 400px; /* Limit the maximum width of the form */
-  width: 100%; /* Set width to 100% to make it responsive within the max-width */
+  margin: 5% auto;
+  max-width: 400px;
+  width: 100%;
 }
 
-h1,
-h3 {
+h1, h3 {
   text-align: center;
 }
 
-/* Change the color of the account number text */
-/* Replace '.account-number-class' with the appropriate class for the account number text */
 .account-number-class {
-  color: #000; /* Change the color to black */
+  color: #000;
 }

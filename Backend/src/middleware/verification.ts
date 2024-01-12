@@ -5,7 +5,7 @@ import { getUserBySessionToken } from "../types/schemas";
 declare global {
   namespace Express {
     interface Request {
-      user?: any; // Modify the type according to your decoded token structure
+      user?: any;
     }
   }
 }

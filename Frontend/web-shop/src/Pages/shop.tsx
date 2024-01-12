@@ -38,7 +38,6 @@ const Shop: React.FC = () => {
       </div>
 
       <div className="products">
-        {/* Render your products using the Product component */}
         {products.map(product => (
           <Product
             id={product._id.toString()}

@@ -10,7 +10,6 @@ const AuthenticationWrapper = ({ children }: any) => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      // If the user is logged in and tries to access these routes, redirect to login
       if (
         location.pathname !== '/auth/login' &&
         location.pathname !== '/auth/register' &&

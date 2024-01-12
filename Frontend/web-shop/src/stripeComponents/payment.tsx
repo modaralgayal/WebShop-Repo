@@ -46,7 +46,6 @@ export const Payment = () => {
         setClientSecret(clientSecret)
       } catch (error: any) {
         console.error('Error fetching payment intent:', error.message)
-        // Handle the error state or set clientSecret to null if needed
         setClientSecret('')
       }
     }

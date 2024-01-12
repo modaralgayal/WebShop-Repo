@@ -46,7 +46,6 @@ const HomePage = () => {
         </Card>
       </Container>
 
-      {/* Line with text */}
       <div
         style={{
           width: '100%',

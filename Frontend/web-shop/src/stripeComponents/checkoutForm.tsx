@@ -54,7 +54,6 @@ export const CheckoutForm = () => {
           {isProcessing ? 'Processing ... ' : 'Pay now'}
         </span>
       </button>
-      {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
   )

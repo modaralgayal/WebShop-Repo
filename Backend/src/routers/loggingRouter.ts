@@ -18,26 +18,21 @@ import { Configure, PaymentIntent } from "../controllers/paymentManagement";
 
 const router = express.Router();
 
-// Creating a user and logging in
 router.post("/auth/register", register);
 router.post("/auth/login", login);
 router.delete("/auth/logout", logOut);
 router.get("/auth/user", getCurrentUser);
 
-// Retrieving user info
 router.get("/api/users", deserializeUser, getAll);
 router.get("/api/users/:id", getById);
 
-// deleting a user
 router.delete("/api/users/:id", isOwner, deleteById);
 
-// Manage products
 router.post("/api/products", addProductToShop);
 router.post("/products/:id", addProductToBasket);
 router.get("/api/products", getAllProducts);
 router.delete("/products/:id", deleteItemFromBasket);
 
-// Payment Handlers
 router.get("/config", Configure);
 router.post("/create-payment-intent", PaymentIntent);
 

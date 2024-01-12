@@ -8,19 +8,17 @@
 }
 
 .payment-form {
-    padding: 60px; /* Increased padding */
-    font-family: 'Raleway';
-    display: flex;
-    flex-direction: column; /* To align items in the center */
-    align-items: center; /* To align items in the center */
-    justify-content: center;
-    font-size: 1.5em; /* Increased font size */
-    color: var(--dark-terminal-color);
-    width: 100%; /* Adjust the width of the form */
-    margin: 0 auto; /* To center the form horizontally */
-    /* Add other styles specific to the payment form */
-  }
-
+  padding: 60px;
+  font-family: 'Raleway';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  color: var(--dark-terminal-color);
+  width: 100%;
+  margin: 0 auto;
+}
 
 form > * {
   margin: 10px 0;
@@ -93,7 +91,7 @@ select {
 
 #messages {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
-  display: none; /* hide initially, then show once the first message arrives */
+  display: none;
   background-color: #0a253c;
   color: #00d924;
   padding: 20px;

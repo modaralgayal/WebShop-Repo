@@ -4,11 +4,11 @@ import { useToken } from '../Services/currentUser'
 import userService from '../Services/users'
 import productService from '../Services/products'
 import { CartItem } from '../Components/cartItem'
-import "../Components/cart.css"
+import '../Components/cart.css'
 
 export const CheckOut = () => {
   const [productData, setProductData] = useState<{ [key: string]: any }>({})
-  const [totalPrice, setTotalPrice] = useState<number>(0) // State to store the total price
+  const [totalPrice, setTotalPrice] = useState<number>(0)
   const [cartItemChanged, setCartItemChanged] = useState<boolean>(false)
   const navigate = useNavigate()
   const { token } = useToken()
@@ -18,7 +18,7 @@ export const CheckOut = () => {
   }
 
   const handleGoToCheckout = () => {
-    navigate('/payment', { state: { totalPrice } }); // Navigate to "/payment" with totalPrice as a parameter
+    navigate('/payment', { state: { totalPrice } })
   }
 
   useEffect(() => {
@@ -56,7 +56,6 @@ export const CheckOut = () => {
           {},
         )
 
-        // Calculate the total price considering the quantity of each item
         const total = Object.values(basketWithData).reduce(
           (acc: number, product: any) => {
             const price = product.price || 0
@@ -66,7 +65,7 @@ export const CheckOut = () => {
           0,
         )
 
-        setTotalPrice(total) // Update the total price state
+        setTotalPrice(total)
 
         setProductData(basketWithData)
       } catch (error) {

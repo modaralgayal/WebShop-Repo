@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap'
+import {
+  TextInput,
+  PasswordInput,
+  Fieldset,
+  Container,
+  Button,
+} from '@mantine/core'
 import userService from '../Services/users'
 
 const CreateUserForm = () => {
@@ -13,7 +19,7 @@ const CreateUserForm = () => {
     if (caughtError) {
       timer = setTimeout(() => {
         setError('')
-      }, 7500) 
+      }, 7500)
     }
 
     return () => {
@@ -36,57 +42,41 @@ const CreateUserForm = () => {
   }
 
   return (
-    <div className="App Header d-flex justify-content-center align-items-center vh-100">
-      <Container className="mt-5">
-        <Row className="justify-content-md-center">
-          <Col md="6">
-            <h2>Create User</h2>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="formEmail">
-                <Form.Label>Email:</Form.Label>
-                <Form.Control
-                  id="email"
-                  type="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="formUsername">
-                <Form.Label>Username:</Form.Label>
-                <Form.Control
-                  id="username"
-                  type="text"
-                  placeholder="Enter username"
-                  value={username}
-                  onChange={e => setUsername(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="formPassword">
-                <Form.Label>Password:</Form.Label>
-                <Form.Control
-                  id="password"
-                  type="password"
-                  placeholder="Enter password"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                />
-              </Form.Group>
-              {caughtError && (
-                <Row className="mb-3">
-                  <Col>
-                    <Alert variant="danger">{caughtError}</Alert>
-                  </Col>
-                </Row>
-              )}
-              <Button variant="primary" type="submit">
-                Create User
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container size={500} my={150}>
+      <Fieldset legend="Registration" variant="filled" radius="lg">
+        <TextInput
+          label="Email"
+          placeholder="your@email.com"
+          required
+          value={email}
+          onChange={event => setEmail(event.currentTarget.value)}
+        />
+        <TextInput
+          label="Username"
+          placeholder="Your Username"
+          required
+          value={username}
+          onChange={event => setUsername(event.currentTarget.value)}
+        />
+        <PasswordInput
+          label="Password"
+          placeholder="Your password"
+          required
+          mt="md"
+          value={password}
+          onChange={event => setPassword(event.currentTarget.value)}
+        />
+        <Button
+          onClick={e => handleSubmit(e)}
+          variant="filled"
+          color="rgba(25, 91, 255, 1)"
+          size="lg"
+          mt={20}
+        >
+          Create User
+        </Button>
+      </Fieldset>
+    </Container>
   )
 }
 

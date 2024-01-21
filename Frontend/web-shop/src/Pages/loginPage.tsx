@@ -1,6 +1,18 @@
 import { useState, useEffect, useContext } from 'react'
 import userService from '../Services/users'
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap'
+import {
+  TextInput,
+  PasswordInput,
+  Checkbox,
+  Anchor,
+  Paper,
+  Title,
+  Text,
+  Container,
+  Group,
+  Button,
+} from '@mantine/core'
+import "../../"
 import { AuthContext } from '../Services/authContext'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from 'react-router'
@@ -60,49 +72,18 @@ const Login = () => {
   }
 
   return (
-    <div className="App Header d-flex justify-content-center align-items-center vh-100">
-      <Container>
-        <Row className="justify-content-center">
-          <Col md={6}>
-            <h2>Login</h2>
-            <Form>
-              <Form.Group>
-                <Form.Label>Email:</Form.Label>
-                <Form.Control
-                  id="email"
-                  type="email"
-                  value={email}
-                  placeholder="example@email.com"
-                  size="lg"
-                  onChange={e => setEmail(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Password:</Form.Label>
-                <Form.Control
-                  id="password"
-                  type="password"
-                  value={password}
-                  placeholder="password"
-                  size="lg"
-                  onChange={e => setPassword(e.target.value)}
-                />
-              </Form.Group>
-              {caughtError && (
-                <Row className="mb-3">
-                  <Col>
-                    <Alert variant="danger">{caughtError}</Alert>
-                  </Col>
-                </Row>
-              )}
-              <Button variant="primary" type="submit" onClick={handleLogin}>
-                Log In
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container size={420} my={40}>
+      <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+        <TextInput label="Email" placeholder="you@mantine.dev" required />
+        <PasswordInput
+          label="Password"
+          placeholder="Your password"
+          required
+          mt="md"
+        />
+        <Button variant="filled" color="rgba(25, 91, 255, 1)" size="lg">Button</Button>
+      </Paper>
+    </Container>
   )
 }
 

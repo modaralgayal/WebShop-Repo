@@ -1,8 +1,14 @@
 import { useState, useEffect, useContext } from 'react'
 import userService from '../Services/users'
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap'
+import {
+  TextInput,
+  PasswordInput,
+  Fieldset,
+  Container,
+  Button,
+} from '@mantine/core'
+import '@mantine/core/styles.css'
 import { AuthContext } from '../Services/authContext'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from 'react-router'
 import { useToken } from '../Services/currentUser'
 
@@ -60,49 +66,34 @@ const Login = () => {
   }
 
   return (
-    <div className="App Header d-flex justify-content-center align-items-center vh-100">
-      <Container>
-        <Row className="justify-content-center">
-          <Col md={6}>
-            <h2>Login</h2>
-            <Form>
-              <Form.Group>
-                <Form.Label>Email:</Form.Label>
-                <Form.Control
-                  id="email"
-                  type="email"
-                  value={email}
-                  placeholder="example@email.com"
-                  size="lg"
-                  onChange={e => setEmail(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Password:</Form.Label>
-                <Form.Control
-                  id="password"
-                  type="password"
-                  value={password}
-                  placeholder="password"
-                  size="lg"
-                  onChange={e => setPassword(e.target.value)}
-                />
-              </Form.Group>
-              {caughtError && (
-                <Row className="mb-3">
-                  <Col>
-                    <Alert variant="danger">{caughtError}</Alert>
-                  </Col>
-                </Row>
-              )}
-              <Button variant="primary" type="submit" onClick={handleLogin}>
-                Log In
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container size={420} my={100}>
+      <Fieldset legend="Personal information" variant="filled" radius="md">
+        <TextInput
+          label="Email"
+          placeholder="your@email.com"
+          required
+          value={email}
+          onChange={event => setEmail(event.currentTarget.value)}
+        />
+        <PasswordInput
+          label="Password"
+          placeholder="Your password"
+          required
+          mt="md"
+          value={password}
+          onChange={event => setPassword(event.currentTarget.value)}
+        />
+        <Button
+          onClick={e => handleLogin(e)}
+          variant="filled"
+          color="rgba(25, 91, 255, 1)"
+          size="lg"
+          mt={20}
+        >
+          Log In
+        </Button>
+      </Fieldset>
+    </Container>
   )
 }
 

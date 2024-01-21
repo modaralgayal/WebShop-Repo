@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { getUserBySessionToken } from "../types/schemas";
-//import { getUserBySessionToken } from "../types/users";
 
 declare global {
   namespace Express {
@@ -10,11 +9,10 @@ declare global {
   }
 }
 
-
 export const isOwner = async (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   try {
     const { id } = req.params;
@@ -51,7 +49,7 @@ export const isOwner = async (
 export const checkcookie = async (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   try {
     const currentUserToken =

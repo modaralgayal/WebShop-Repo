@@ -3,6 +3,7 @@ import userService from '../Services/users'
 import {
   TextInput,
   PasswordInput,
+  Fieldset,
   Checkbox,
   Anchor,
   Paper,
@@ -12,6 +13,7 @@ import {
   Group,
   Button,
 } from '@mantine/core'
+import '@mantine/core/styles.css'
 import { AuthContext } from '../Services/authContext'
 import { useNavigate } from 'react-router'
 import { useToken } from '../Services/currentUser'
@@ -69,16 +71,15 @@ const Login = () => {
     }
   }
 
-
   return (
-    <Container size={420} my={40}>
-      <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+    <Container size={420} my={100}>
+      <Fieldset legend="Personal information" variant="filled" radius="md">
         <TextInput
           label="Email"
-          placeholder="you@mantine.dev"
+          placeholder="your@email.com"
           required
           value={email}
-          onChange={(event) => setEmail(event.currentTarget.value)}
+          onChange={event => setEmail(event.currentTarget.value)}
         />
         <PasswordInput
           label="Password"
@@ -86,19 +87,20 @@ const Login = () => {
           required
           mt="md"
           value={password}
-          onChange={(event) => setPassword(event.currentTarget.value)}
+          onChange={event => setPassword(event.currentTarget.value)}
         />
         <Button
-          onClick={(e) => handleLogin(e)}
+          onClick={e => handleLogin(e)}
           variant="filled"
           color="rgba(25, 91, 255, 1)"
           size="lg"
+          mt={20}
         >
-          Button
+          Log In
         </Button>
-      </Paper>
+      </Fieldset>
     </Container>
-  );
-};
+  )
+}
 
 export default Login

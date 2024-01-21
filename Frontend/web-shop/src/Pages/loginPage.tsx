@@ -12,9 +12,7 @@ import {
   Group,
   Button,
 } from '@mantine/core'
-import "../../"
 import { AuthContext } from '../Services/authContext'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from 'react-router'
 import { useToken } from '../Services/currentUser'
 
@@ -71,20 +69,36 @@ const Login = () => {
     }
   }
 
+
   return (
     <Container size={420} my={40}>
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <TextInput label="Email" placeholder="you@mantine.dev" required />
+        <TextInput
+          label="Email"
+          placeholder="you@mantine.dev"
+          required
+          value={email}
+          onChange={(event) => setEmail(event.currentTarget.value)}
+        />
         <PasswordInput
           label="Password"
           placeholder="Your password"
           required
           mt="md"
+          value={password}
+          onChange={(event) => setPassword(event.currentTarget.value)}
         />
-        <Button variant="filled" color="rgba(25, 91, 255, 1)" size="lg">Button</Button>
+        <Button
+          onClick={(e) => handleLogin(e)}
+          variant="filled"
+          color="rgba(25, 91, 255, 1)"
+          size="lg"
+        >
+          Button
+        </Button>
       </Paper>
     </Container>
-  )
-}
+  );
+};
 
 export default Login

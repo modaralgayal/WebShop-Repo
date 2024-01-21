@@ -3,5 +3,8 @@
     "postcss": "^8.4.33",
     "postcss-preset-mantine": "^1.12.3",
     "postcss-simple-vars": "^7.0.1"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^2.46.0"
   }
 }

@@ -45,7 +45,6 @@ const HomePage = () => {
           </Card.Body>
         </Card>
       </Container>
-
       <div
         style={{
           width: '100%',
@@ -56,7 +55,6 @@ const HomePage = () => {
           padding: '20px',
         }}
       >
-        Learn More - Additional Information Here
       </div>
     </div>
   )

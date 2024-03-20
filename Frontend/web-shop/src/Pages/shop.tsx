@@ -46,6 +46,7 @@ const Shop: React.FC = () => {
             imageFilename={product.icon}
           />
         ))}
+      
       </div>
     </div>
   )

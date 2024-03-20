@@ -1,4 +1,4 @@
-|     Pvm      |   Tunnit  |        Kuvailu       |
+|     Date     |   Hours   |        Description   |
 |--------------|-----------|----------------------|
 |   25.12.23   |   2.5 h   |  Downloaded Typescript dependencies, Established connection in mongoDB    
 |   27.12.23   |   7 h     |  Programmed user Ownership verification using a token for each user 

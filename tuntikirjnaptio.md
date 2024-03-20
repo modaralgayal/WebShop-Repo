@@ -12,3 +12,4 @@
 |   12.1.24    |   2 h     |  Finald fixes on frontend and Readme.md
 |   21.1.24    |   7 h     |  Implemented new UI package Mantine for all buttons and forms 
 |   20.3.24    |   2 h     |  Fixed pages not loading and worked on documentation 
+| Total Hours  |   61.5 h  |

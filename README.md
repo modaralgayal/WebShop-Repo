@@ -3,6 +3,8 @@
 This is my webshop App where I demonstrate my skills in creating a functional website
 using **Typescript** with many libraries required.
 
+* [Hourly Documentation](./tuntikirjnaptio.md)
+
 ### Description of Structure
 
 * The app uses mongoDB for storing userdata 

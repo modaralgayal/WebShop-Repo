@@ -3,7 +3,6 @@ import { useState, FormEvent } from 'react'
 import { useNavigate } from 'react-router'
 import { useStripe, useElements } from '@stripe/react-stripe-js'
 import './payments.css'
-//import { apiBaseUrl } from '../constants'
 
 export const CheckoutForm = () => {
   const stripe = useStripe()

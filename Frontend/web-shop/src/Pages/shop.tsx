@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import productService from '../Services/products'
 import Product from '../Components/product'
 import './shop.css'
+import { Drawer, Button } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 import { AuthContext } from '../Services/authContext'
 
 interface ProductInt {
@@ -15,6 +17,7 @@ const Shop: React.FC = () => {
   const [products, setProducts] = useState<ProductInt[]>([])
   // @ts-ignore
   const { isLoggedIn, logout } = useContext(AuthContext)
+  const [opened, { open, close }] = useDisclosure(false);
 
   console.log('Checking in shop', isLoggedIn)
 
@@ -36,6 +39,13 @@ const Shop: React.FC = () => {
       <div className="shopTitle">
         <h1> Modar's Shop </h1>
       </div>
+
+      <Drawer offset={8} radius="md" opened={opened} onClose={close} title="Filters">
+          { /* All Filters I need for pricing Etcetera */ }
+      </Drawer>
+      
+      <Button onClick={open} size='md' style={{ position: 'absolute', top: '33px', left: '50px' }}> Filter Selection </Button>
+
 
       <div className="products">
         {products.map(product => (

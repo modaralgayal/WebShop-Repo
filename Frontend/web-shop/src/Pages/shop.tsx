@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import productService from '../Services/products'
 import Product from '../Components/product'
 import './shop.css'
-import { Drawer, Button } from '@mantine/core'
+import { Text, Drawer, Button, Slider } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { AuthContext } from '../Services/authContext'
 
@@ -41,7 +41,15 @@ const Shop: React.FC = () => {
       </div>
 
       <Drawer offset={8} radius="md" opened={opened} onClose={close} title="Filters">
-          { /* All Filters I need for pricing Etcetera */ }
+          <Text ta="center"> Select Price Range </Text>
+          <Slider
+          style={{ top: "75px" }}
+          color='blue'
+          defaultValue={0} 
+          min={0}
+          max={250}
+          labelAlwaysOn
+          />
       </Drawer>
       
       <Button onClick={open} size='md' style={{ position: 'absolute', top: '33px', left: '50px' }}> Filter Selection </Button>

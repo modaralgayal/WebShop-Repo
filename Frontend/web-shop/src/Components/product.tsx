@@ -1,6 +1,8 @@
 import React from 'react'
 import userService from '../Services/users'
 import { useToken } from '../Services/currentUser'
+import { Card } from '@mantine/core'
+import "./components.css"
 
 interface ProductProps {
   id: string
@@ -28,23 +30,34 @@ const Product: React.FC<ProductProps> = ({
   }
 
   return (
-    <div className="product">
-      <img src={`/productPng/${imageFilename}`} alt={name.toString()} />
-      <div className="description">
-        <p>
-          <b>{name}</b>
-        </p>
-        <p>
-          <b>€{price}</b>
-        </p>
+    <Card
+      shadow="xl"
+      padding="lg"
+      radius="xl"
+      withBorder
+      className='product-card'
+    >
+      <div className="product">
+        <img src={`/productPng/${imageFilename}`} alt={name.toString()} />
+        <div className="description">
+          <p>
+            <b>{name}</b>
+          </p>
+          <p>
+            <b>€{price}</b>
+          </p>
+        </div>
+        <div>
+          <button
+            id={name}
+            className="addToCartBttn"
+            onClick={handleAddingProduct}
+          >
+            Add To Cart
+          </button>
+        </div>
       </div>
-      <div>
-        
-        <button id={name} className="addToCartBttn" onClick={handleAddingProduct}>
-          Add To Cart
-        </button>
-      </div>
-    </div>
+    </Card>
   )
 }
 

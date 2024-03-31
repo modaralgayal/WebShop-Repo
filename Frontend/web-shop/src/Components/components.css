@@ -72,3 +72,12 @@ h3 {
 .account-number-class {
   color: #000;
 }
+
+.product-card {
+  background-color: white;
+  transition: background-color 0.3s;
+}
+
+.product-card:hover {
+  background-color: lightgrey;
+}

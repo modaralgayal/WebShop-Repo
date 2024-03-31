@@ -58,7 +58,6 @@ const Shop: React.FC = () => {
       <div className="shopTitle">
         <h1> Modar's Shop </h1>
       </div>
-
       <Drawer
         offset={8}
         radius="md"

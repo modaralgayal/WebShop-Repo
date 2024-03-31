@@ -17,7 +17,10 @@ const Shop: React.FC = () => {
   const [products, setProducts] = useState<ProductInt[]>([])
   // @ts-ignore
   const { isLoggedIn, logout } = useContext(AuthContext)
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, { open, close }] = useDisclosure(false)
+  const [value, setValue] = useState(50)
+  const [endValue, setEndValue] = useState(50)
+  const [filteredProducts, setFilteredProducts] = useState<ProductInt[]>([])
 
   console.log('Checking in shop', isLoggedIn)
 
@@ -26,6 +29,7 @@ const Shop: React.FC = () => {
       try {
         const fetchedProducts: ProductInt[] = await productService.getAll()
         setProducts(fetchedProducts)
+        setFilteredProducts(fetchedProducts)
       } catch (error) {
         console.error('Error fetching products:', error)
       }
@@ -34,37 +38,88 @@ const Shop: React.FC = () => {
     fetchProducts()
   }, [])
 
+  useEffect(() => {
+    setFilteredProducts(products.filter(product => product.price <= endValue))
+  }, [endValue, products])
+
+  const handleFilter = () => {
+    close()
+    setFilteredProducts(products.filter(product => product.price <= endValue))
+  }
+
+  const handleCancel = () => {
+    close()
+    setEndValue(250) // Reset the end value to maximum
+    setFilteredProducts(products)
+  }
+
   return (
     <div className="shop">
       <div className="shopTitle">
         <h1> Modar's Shop </h1>
       </div>
 
-      <Drawer offset={8} radius="md" opened={opened} onClose={close} title="Filters">
-          <Text ta="center"> Select Price Range </Text>
-          <Slider
-          style={{ top: "75px" }}
-          color='blue'
-          defaultValue={0} 
+      <Drawer
+        offset={8}
+        radius="md"
+        opened={opened}
+        onClose={close}
+        title="Filters"
+      >
+        <Text ta="center"> Select Price Range </Text>
+        <Slider
+          value={value}
+          onChange={setValue}
+          onChangeEnd={setEndValue}
+          style={{ top: '75px' }}
+          size="lg"
+          color="red"
           min={0}
           max={250}
           labelAlwaysOn
-          />
+        />
+        <Button
+          variant="filled"
+          color="rgba(0, 0, 0, 1)"
+          radius="xs"
+          style={{ top: '95px' }}
+          size="lg"
+          onClick={handleFilter}
+        >
+          {' '}
+          Filter{' '}
+        </Button>
+        <Button
+          variant="outline"
+          radius="xs"
+          style={{ top: '95px', left: '15px' }}
+          size="lg"
+          onClick={handleCancel}
+        >
+          {' '}
+          Cancel{' '}
+        </Button>
       </Drawer>
-      
-      <Button onClick={open} size='md' style={{ position: 'absolute', top: '33px', left: '50px' }}> Filter Selection </Button>
 
+      <Button
+        onClick={open}
+        size="md"
+        style={{ position: 'absolute', top: '33px', left: '50px' }}
+      >
+        {' '}
+        Filter Selection{' '}
+      </Button>
 
       <div className="products">
-        {products.map(product => (
+        {filteredProducts.map(product => (
           <Product
-            id={product._id.toString()}
+            key={product._id.toString()}
             name={product.name}
             price={product.price}
             imageFilename={product.icon}
+            id={''}
           />
         ))}
-      
       </div>
     </div>
   )

@@ -13,4 +13,5 @@
 | 21.1.24     | 7 h    | Implemented new UI package Mantine for all buttons and forms                                                |
 | 20.3.24     | 2 h    | Fixed pages not loading and worked on documentation                                                         |
 | 23.3.24     | 1 h    | Began adding filtering functionality                                                                        |
-| Total Hours | 62.5 h |
+| 31.3.24     | 2 h    | Worked on Page UI + Filter functionality done                                                               |
+| Total Hours | 64.5 h |

@@ -1,9 +1,5 @@
-.shopTitle {
-  margin-top: 100px;
-  text-align: center;
-  font-size: 40px;
-}
 .products {
+  margin-top: 100px;
   width: 100%;
   height: auto;
   display: grid;

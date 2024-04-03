@@ -55,9 +55,6 @@ const Shop: React.FC = () => {
 
   return (
     <div className="shop">
-      <div className="shopTitle">
-        <h1> Modar's Shop </h1>
-      </div>
       <Drawer
         offset={8}
         radius="md"
@@ -103,7 +100,7 @@ const Shop: React.FC = () => {
       <Button
         onClick={open}
         size="md"
-        style={{ position: 'absolute', top: '33px', left: '50px' }}
+        style={{ position: 'absolute', top: '25px', left: '50px' }}
       >
         {' '}
         Filter Selection{' '}

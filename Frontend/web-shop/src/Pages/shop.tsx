@@ -49,7 +49,7 @@ const Shop: React.FC = () => {
 
   const handleCancel = () => {
     close()
-    setEndValue(250) // Reset the end value to maximum
+    setEndValue(250)
     setFilteredProducts(products)
   }
 
@@ -113,7 +113,7 @@ const Shop: React.FC = () => {
             name={product.name}
             price={product.price}
             imageFilename={product.icon}
-            id={''}
+            id={product._id.toString()}
           />
         ))}
       </div>

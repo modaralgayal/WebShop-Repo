@@ -2,7 +2,8 @@ import React from 'react'
 import userService from '../Services/users'
 import { useToken } from '../Services/currentUser'
 import { Card } from '@mantine/core'
-import "./components.css"
+import './components.css'
+import { useNavigate } from 'react-router'
 
 interface ProductProps {
   id: string
@@ -18,6 +19,16 @@ const Product: React.FC<ProductProps> = ({
   imageFilename,
 }) => {
   const { token } = useToken()
+  const navigate = useNavigate()
+
+  const handleViewingProduct = (productId: string) => {
+    try {
+      navigate(`/viewProduct/${productId}`)
+    } catch (error: any) {
+      console.log(error.response?.data?.message)
+      return error.response?.data?.message
+    }
+  }
 
   const handleAddingProduct = async () => {
     try {
@@ -35,7 +46,7 @@ const Product: React.FC<ProductProps> = ({
       padding="lg"
       radius="xl"
       withBorder
-      className='product-card'
+      className="product-card"
     >
       <div className="product">
         <img src={`/productPng/${imageFilename}`} alt={name.toString()} />
@@ -54,6 +65,13 @@ const Product: React.FC<ProductProps> = ({
             onClick={handleAddingProduct}
           >
             Add To Cart
+          </button>
+          <button
+            className="addToCartBttn"
+            onClick={() => handleViewingProduct(id)}
+          >
+            {' '}
+            View{' '}
           </button>
         </div>
       </div>

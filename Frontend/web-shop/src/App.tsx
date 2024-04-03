@@ -13,6 +13,7 @@ import { Payment } from './stripeComponents/payment'
 import AuthenticationWrapper from './Components/authenticationwrapper'
 import { Completion } from './stripeComponents/completion'
 import { MantineProvider } from '@mantine/core'
+import { DisplayProductFullPage } from './Pages/viewProduct'
 
 const App = () => {
   const { isLoggedIn } = useContext(AuthContext)
@@ -43,6 +44,7 @@ const App = () => {
                 <Route path="/checkout" element={<CheckOut />} />
                 <Route path="/payment" element={<Payment />} />
                 <Route path="/completion" element={<Completion />} />
+                <Route path="/viewProduct/:productId" element={<DisplayProductFullPage />} />
               </Routes>
             </AuthenticationWrapper>
           </Router>

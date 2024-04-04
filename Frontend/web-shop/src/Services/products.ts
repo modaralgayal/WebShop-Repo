@@ -16,7 +16,7 @@ const getProductById = async (productId: string | undefined) => {
     if (!productId) {
       throw new Error('Product ID is undefined');
     }
-
+    
     const response = await axios.get(`${apiBaseUrl}/api/products/${productId}`);
     console.log("This is the response:", response);
     return response.data;

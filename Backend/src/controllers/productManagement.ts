@@ -3,6 +3,7 @@ import {
   createProduct,
   getProducts,
   getUserBySessionToken,
+  getProductById,
 } from "../types/schemas";
 
 export const addProductToBasket = async (req: Request, res: Response) => {
@@ -81,5 +82,16 @@ export const getAllProducts = async (_req: Request, res: Response) => {
     res.status(200).json(products);
   } catch (error) {
     res.status(500).send("Failed Fetching products");
+  }
+};
+
+export const getOneProduct = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    console.log("This is the id:", id);
+    const product = await getProductById(id);
+    return res.status(200).json(product);
+  } catch (error) {
+    return res.status(500).send("Failed Fetching product");
   }
 };

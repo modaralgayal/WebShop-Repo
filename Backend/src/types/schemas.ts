@@ -16,6 +16,7 @@ interface Product extends Document {
   name: string;
   price: number;
   category: string;
+  description: string;
   icon: string;
 }
 

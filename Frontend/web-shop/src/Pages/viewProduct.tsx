@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import productService from '../Services/products.ts'
+import { NativeSelect, Button } from '@mantine/core'
 import './view.css'
 
 interface Product {
@@ -38,6 +39,26 @@ export const DisplayProductFullPage = () => {
       <p className="productName">{product.name}</p>
       <p className="productDescription">{product.description}</p>
       <p className="productPrice">{product.price},00 €</p>
+      <NativeSelect
+        className="sizes"
+        size="xl"
+        radius="lg"
+        data={['XS', 'S', 'M', 'L', 'XL']}
+        value="Select Size"
+      />
+      <Button
+        className="button"
+        variant="filled"
+        color="rgba(0, 0, 0, 1)"
+        radius="xs"
+      >
+        Add To Cart
+      </Button>
+      <img
+        className="productImage"
+        src={`/productPng/${product.icon}`}
+        alt={product.name.toString()}
+      />
     </div>
   )
 }

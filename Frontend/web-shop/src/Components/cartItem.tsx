@@ -21,7 +21,6 @@ export const CartItem = (props: any) => {
       await userService.addProductToBasket(_id, token)
       onCartItemChanged()
     } catch (error: any) {
-      console.log(error)
       throw new Error(error.response.data.message)
     }
   }
@@ -41,7 +40,6 @@ export const CartItem = (props: any) => {
       await userService.deleteProductFromBasket(_id, token)
       onCartItemChanged()
     } catch (error: any) {
-      console.log(error)
       throw new Error(error.response.data.message)
     }
   }

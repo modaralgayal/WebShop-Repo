@@ -31,7 +31,7 @@ const CreateUserForm = () => {
     e.preventDefault()
     try {
       await userService.create({ email, username, password })
-      console.log('trying to create')
+      //console.log('trying to create')
       setEmail('')
       setUsername('')
       setPassword('')

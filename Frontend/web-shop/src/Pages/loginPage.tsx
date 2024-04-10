@@ -52,12 +52,12 @@ const Login = () => {
     e.preventDefault()
     try {
       const user = await userService.login({ email, password })
-      console.log(user)
+      //console.log(user)
       const userToken = user.authentication.sessionToken
       setAuthToken(userToken)
       login()
-      console.log(userToken)
-      console.log('Logged in:', user)
+      //console.log(userToken)
+      //console.log('Logged in:', user)
       return navigate('/shop')
     } catch (error: any) {
       console.log('Login Failed: ', error)

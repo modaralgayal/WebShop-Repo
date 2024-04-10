@@ -27,7 +27,7 @@ export const isOwner = async (
     }
 
     const currentUser = await getUserBySessionToken(currentUserToken);
-    console.log("Current user is", currentUser);
+    //console.log("Current user is", currentUser);
 
     if (!currentUser) {
       console.log("Current user does not exist");

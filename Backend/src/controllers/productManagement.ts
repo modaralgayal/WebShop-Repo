@@ -10,9 +10,9 @@ export const addProductToBasket = async (req: Request, res: Response) => {
   try {
     const productId = req.params.id;
     const currentUserToken = req.body.userToken;
-    console.log(currentUserToken);
+    //console.log(currentUserToken);
     const user = await getUserBySessionToken(currentUserToken);
-    console.log("Adding product to user: ", user);
+    console.log("Product Added Successfully");
 
     if (!user || !productId) {
       return res.status(404).json({ message: "User or Product Not Found" });
@@ -88,7 +88,7 @@ export const getAllProducts = async (_req: Request, res: Response) => {
 export const getOneProduct = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    console.log("This is the id:", id);
+    //console.log("This is the id:", id);
     const product = await getProductById(id);
     return res.status(200).json(product);
   } catch (error) {

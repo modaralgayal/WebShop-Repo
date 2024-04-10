@@ -52,7 +52,7 @@ export const deleteById = async (req: Request, res: Response) => {
 export const getCurrentUser = async (req: Request, res: Response) => {
   try {
     const currentUserToken = req.headers.authorization;
-    console.log(currentUserToken);
+    //console.log(currentUserToken);
 
     if (!currentUserToken) {
       console.log("Token Does not exist");
@@ -60,7 +60,7 @@ export const getCurrentUser = async (req: Request, res: Response) => {
     }
 
     const currentUser = await getUserBySessionToken(currentUserToken);
-    console.log(currentUser);
+    //console.log(currentUser);
     return res.status(200).json(currentUser);
   } catch (error: any) {
     console.log(error.response.data.message);

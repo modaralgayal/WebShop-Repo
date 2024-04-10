@@ -16,4 +16,5 @@
 | 31.3.24     | 2 h    | Worked on Page UI + Filter functionality done                                                                         |
 | 3.4.24      | 3 h    | Started Implementing a page to view the product, the Idea is to be able to select sizes etcetera, still toublshooting |
 | 4.4.24      | 2 h    | Implemented Product viewing page for size selection, troubleshooted probelms in the backend                           |
-| Total Hours | 69.5 h |
+| 10.4.24     | 1 h    | Added functionality in viewProduct page, started improving UI                                                         |
+| Total Hours | 70.5 h |

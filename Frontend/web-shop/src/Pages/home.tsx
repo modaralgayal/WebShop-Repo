@@ -7,12 +7,10 @@ const HomePage = () => {
 
   const handleCreateUser = () => {
     navigate('/auth/register')
-    console.log('Create user clicked')
   }
 
   const handleLogin = () => {
     navigate('/auth/login')
-    console.log('Login clicked')
   }
 
   return (

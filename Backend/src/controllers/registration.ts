@@ -38,7 +38,7 @@ export const login = async (req: Request, res: Response) => {
       httpOnly: true, 
     });
     await user.save();
-    console.log(user);
+    //console.log(user);
     return res.send(user);
   } catch (error) {
     console.log(error);
@@ -54,7 +54,7 @@ export const register = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "A Field Is Missing" });
     }
     const existingUser = await getUserByEmail(email);
-    console.log(existingUser);
+    //console.log(existingUser);
     if (existingUser) {
       console.log("user already exists");
       return res.status(403).json({ message: "User Already Exists" });

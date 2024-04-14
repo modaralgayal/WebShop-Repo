@@ -1,15 +1,19 @@
-import { createContext, useState, ReactNode } from 'react'
+import React, { createContext, useState, ReactNode } from 'react'
 
 type AuthContextType = {
   isLoggedIn: boolean
   login: () => void
   logout: () => void
+  filteredAmount: number
+  setFilteredAmount: (amount: number) => void
 }
 
 const initialAuthState: AuthContextType = {
   isLoggedIn: false,
   login: () => {},
   logout: () => {},
+  filteredAmount: 50,
+  setFilteredAmount: () => {},
 }
 
 export const AuthContext = createContext<AuthContextType>(initialAuthState)
@@ -20,6 +24,7 @@ type Props = {
 
 export const AuthProvider = ({ children }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [filteredAmount, setFilteredAmount] = useState<number>(50)
 
   const login = () => {
     setIsLoggedIn(true)
@@ -33,6 +38,8 @@ export const AuthProvider = ({ children }: Props) => {
     isLoggedIn,
     login,
     logout,
+    filteredAmount,
+    setFilteredAmount,
   }
 
   return (

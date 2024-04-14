@@ -6,31 +6,35 @@
   background-color: black;
   justify-content: flex-end;
   align-items: center;
+  padding-right: 50px;
 }
 
 .link {
-  margin-right: 50px;
+  margin-left: -30px;
   display: flex;
-  align-items: center;
 }
 
-.link a {
-  color: #f6f5f4;
-  font-size: 24px;
-  margin-right: 20px;
-  transition: color 0.3s ease;
+.shopping-cart-button {
+  width: 100px;
+  position: absolute;
+  right: 180px; 
 }
 
-.link a:hover {
-  color: rgb(0, 94, 255);
+.logout-button {
+  position: absolute;
+  right: 50px;
 }
 
-
+.filter-selection-button {
+  position: absolute;
+  left: 20px;
+}
 .shop-name {
   color: #f6f5f4;
   font-size: 30px;
   position: absolute;
   margin-top: 10px;
+  margin-right: auto;
   left: 50%;
   transform: translateX(-50%);
 }

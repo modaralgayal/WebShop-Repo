@@ -16,19 +16,23 @@
 
 .shopping-cart-button {
   width: 100px;
+  border-radius: 0%;
   position: absolute;
-  right: 180px; 
+  right: 180px;
 }
 
 .logout-button {
   position: absolute;
   right: 50px;
+  border-radius: 0%;
 }
 
 .filter-selection-button {
   position: absolute;
   left: 20px;
+  border-radius: 0%;
 }
+
 .shop-name {
   color: #f6f5f4;
   font-size: 30px;

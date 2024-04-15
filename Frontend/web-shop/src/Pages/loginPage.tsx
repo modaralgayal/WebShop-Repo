@@ -8,6 +8,7 @@ import {
   Button,
 } from '@mantine/core'
 import '@mantine/core/styles.css'
+import './login.css'
 import { AuthContext } from '../Services/authContext'
 import { useNavigate } from 'react-router'
 import { useToken } from '../Services/currentUser'
@@ -66,35 +67,39 @@ const Login = () => {
   }
 
   return (
-    <Container size={420} my={100}>
-      <Fieldset legend="Personal information" variant="filled" radius="md">
-        <TextInput
-          label="Email"
-          placeholder="your@email.com"
-          required
-          value={email}
-          onChange={event => setEmail(event.currentTarget.value)}
-        />
-        <PasswordInput
-          label="Password"
-          placeholder="Your password"
-          required
-          mt="md"
-          value={password}
-          onChange={event => setPassword(event.currentTarget.value)}
-        />
-        <Button
-          onClick={e => handleLogin(e)}
-          variant="filled"
-          color="rgba(25, 91, 255, 1)"
-          size="lg"
-          mt={20}
-        >
-          Log In
-        </Button>
-      </Fieldset>
-      
-    </Container>
+    <Fieldset
+      legend={<span style={{ fontSize: '24px' }}>Personal information</span>}
+      variant="filled"
+      className="container"
+      radius="md"
+    >
+      <TextInput
+        label={<span style={{ fontSize: '24px' }}>Email</span>}
+        placeholder="your@email.com"
+        required
+        value={email}
+        onChange={event => setEmail(event.currentTarget.value)}
+        style={{ width: '100%', padding: '25px' }} // Adjust width here
+      />
+      <PasswordInput
+        label={<span style={{ fontSize: '24px' }}>Password</span>}
+        placeholder="Your password"
+        required
+        mt="md"
+        value={password}
+        onChange={event => setPassword(event.currentTarget.value)}
+        style={{ width: '100%', padding: '25px' }} // Adjust width here
+      />
+      <Button
+        onClick={e => handleLogin(e)}
+        variant="filled"
+        color="rgba(25, 91, 255, 1)"
+        size="xl"
+        style={{ width:"20%" }}
+      >
+        Log In
+      </Button>
+    </Fieldset>
   )
 }
 

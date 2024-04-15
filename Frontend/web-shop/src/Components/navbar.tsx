@@ -55,7 +55,7 @@ export const Navbar = () => {
             <FontAwesomeIcon
               icon={faCartShopping}
               className="icon"
-              style={{ width:"50px" }}
+              style={{ width: '50px' }}
               id="shopping cart"
             />
           </Button>
@@ -94,14 +94,12 @@ export const Navbar = () => {
               Cancel{' '}
             </Button>
           </Drawer>
-          <Button
-            onClick={open}
-            size="xl"
-            className="filter-selection-button"
-          >
+
+          <Button onClick={open} size="xl" className="filter-selection-button">
             {' '}
             Filter Selection{' '}
           </Button>
+
           <Button
             onClick={handleLogOut}
             variant="filled"

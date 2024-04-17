@@ -9,7 +9,7 @@
 | 8.1.24      | 8 h   | Worked on the UI and fixed bugs in code                                                                               |
 | 10.1.24     | 5 h   | more Stripe payment fixing                                                                                            |
 | 11.1.24     | 5 h   | made the README.md for users, including instructions and a demo video                                                 |
-| 12.1.24     | 2 h   | Finald fixes on frontend and Readme.md                                                                                |
+| 12.1.24     | 2 h   | Final fixes on frontend and Readme.md                                                                                 |
 | 21.1.24     | 7 h   | Implemented new UI package Mantine for all buttons and forms                                                          |
 | 20.3.24     | 2 h   | Fixed pages not loading and worked on documentation                                                                   |
 | 23.3.24     | 1 h   | Began adding filtering functionality                                                                                  |
@@ -20,4 +20,5 @@
 | 11.4.24     | 1.5 h | Read CSS documentation and did research on positioning, still trying to get a modern look on the viewProduct page     |
 | 14.4.24     | 2.5 h | Refactored Navbar code, fixed bugs there. Improved UI                                                                 |
 | 15.4.24     | 2.5 h | Stuck trying to read and work on CSS problems, not yet solved                                                         |
-| Total Hours | 76 h  |
+| 17.4.24     | 2 h   | Spent lots of time reading and practicing on css flexbox, grouped navbar components                                   |
+| Total Hours | 78 h  |

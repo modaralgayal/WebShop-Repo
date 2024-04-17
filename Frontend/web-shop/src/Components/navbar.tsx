@@ -4,7 +4,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../Services/authContext'
-import { Button, Slider, Text, Drawer } from '@mantine/core'
+import { Group, Button, Slider, Text, Drawer } from '@mantine/core'
 import userService from '../Services/users'
 import { useToken } from '../Services/currentUser'
 import { useState } from 'react'
@@ -47,18 +47,6 @@ export const Navbar = () => {
       <div className="shop-name"> Modar's Webshop </div>
       {isLoggedIn && (
         <>
-          <Button
-            className="shopping-cart-button"
-            size="xl"
-            onClick={() => navigate('/checkout')}
-          >
-            <FontAwesomeIcon
-              icon={faCartShopping}
-              className="icon"
-              style={{ width: '50px' }}
-              id="shopping cart"
-            />
-          </Button>
           <Drawer offset={8} radius="md" opened={opened} onClose={close}>
             <Text ta="center"> Select Price Range </Text>
             <Slider
@@ -76,39 +64,54 @@ export const Navbar = () => {
               variant="filled"
               color="rgba(0, 0, 0, 1)"
               radius="xs"
-              style={{ top: '95px' }}
               size="lg"
               onClick={handleFilter}
             >
-              {' '}
-              Filter{' '}
+              Filter
             </Button>
             <Button
               variant="outline"
               radius="xs"
-              style={{ top: '95px', left: '15px' }}
               size="lg"
               onClick={handleCancel}
             >
-              {' '}
-              Cancel{' '}
+              Cancel
             </Button>
           </Drawer>
 
+          {/* Filter button */}
+
           <Button onClick={open} size="xl" className="filter-selection-button">
-            {' '}
-            Filter Selection{' '}
+            Filter Selection
           </Button>
 
-          <Button
-            onClick={handleLogOut}
-            variant="filled"
-            color="rgba(214, 21, 21, 1)"
-            size="xl"
-            className="logout-button"
-          >
-            Logout
-          </Button>
+          <Group justify="space-between">
+            {/* Shopping cart button */}
+            <Button
+              className="shopping-cart-button"
+              size="xl"
+              onClick={() => navigate('/checkout')}
+            >
+              <FontAwesomeIcon
+                icon={faCartShopping}
+                className="icon"
+                style={{ width: '50px' }}
+                id="shopping cart"
+              />
+            </Button>
+
+            {/* Logout button */}
+
+            <Button
+              onClick={handleLogOut}
+              variant="filled"
+              color="rgba(214, 21, 21, 1)"
+              size="xl"
+              className="logout-button"
+            >
+              Logout
+            </Button>
+          </Group>
         </>
       )}
     </div>

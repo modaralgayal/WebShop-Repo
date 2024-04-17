@@ -3,27 +3,23 @@
   width: 100%;
   height: 80px;
   background-color: black;
-  align-items: center;
-  flex-direction: row;
 }
 
 .shopping-cart-button {
-  position: relative;
-  left: 80px;
-  border-radius: 0%;
-
+  font-size: x-large;
+  border-radius: 0px;
 }
 
 .logout-button {
-  position: relative;
-  right: 20px;
-  border-radius: 0%;
+  font-size: x-large;
+  border-radius: 0px;
+  margin-right: 15px;
 }
 
 .filter-selection-button {
-  position: relative;
-  border-radius: 0%;
-  justify-self: auto;
+  margin-left: 15px;
+  font-size: x-large;
+  border-radius: 0px;
 }
 
 .shop-name {

@@ -5,15 +5,22 @@
   background-color: black;
 }
 
+.buttonGroup {
+  display: flex;
+}
+
 .shopping-cart-button {
   font-size: x-large;
   border-radius: 0px;
+  width: 130px;
 }
 
 .logout-button {
   font-size: x-large;
+  size: large;
   border-radius: 0px;
   margin-right: 15px;
+  width: 130px;
 }
 
 .filter-selection-button {
@@ -30,4 +37,15 @@
   margin-right: auto;
   left: 50%;
   transform: translateX(-50%);
+}
+
+@media screen and (max-width: 1000px) {
+  .buttonGroup {
+    display: grid;
+  }
+
+  .navbar {
+    height: 150px;
+  }
+
 }

@@ -4,6 +4,7 @@ import productService from '../Services/products.ts'
 import { NativeSelect, Button } from '@mantine/core'
 import userService from '../Services/users'
 import { useToken } from '../Services/currentUser'
+import { Group } from '@mantine/core'
 import './view.css'
 
 interface Product {
@@ -55,28 +56,29 @@ export const DisplayProductFullPage = () => {
   }
 
   return (
-    <div className="productContainer">
+    <div className="view-container">
       <div className="productInfo">
-          <p className="productName">{product.name}</p>
-          <p className="productDescription">{product.description}</p>
-          <p className="productPrice">{product.price},00 €</p>
-          <NativeSelect
-            className="sizes"
-            size="xl"
-            radius="lg"
-            data={['XS', 'S', 'M', 'L', 'XL']}
-            defaultValue="Select Size"
-          />
-          <Button
-            className="button"
-            variant="filled"
-            color="rgba(0, 0, 0, 1)"
-            radius="xs"
-            onClick={handleAddingProduct}
-          >
-            Add To Cart
-          </Button>
+        <p className="productName">{product.name}</p>
+        <p className="productDescription">{product.description}</p>
+        <p className="productPrice">{product.price},00 €</p>
+        <NativeSelect
+          className="sizes"
+          size="xl"
+          radius="lg"
+          data={['XS', 'S', 'M', 'L', 'XL']}
+          defaultValue="Select Size"
+        />
+        <Button
+          className="button"
+          variant="filled"
+          color="rgba(0, 0, 0, 1)"
+          radius="xs"
+          onClick={handleAddingProduct}
+        >
+          Add To Cart
+        </Button>
       </div>
+
       <div className="productCard">
         <img
           className="productImage"
@@ -85,4 +87,5 @@ export const DisplayProductFullPage = () => {
         />
       </div>
     </div>
-)}
+  )
+}

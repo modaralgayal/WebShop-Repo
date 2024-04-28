@@ -1,12 +1,12 @@
 .productName {
-  position: relative;
+  position: fixed;
   top: 250px;
   font-size: 35px;
   font-family: 'Times New Roman', Times, serif;
 }
 
 .productDescription {
-  position: absolute;
+  position: fixed;
   top: 300px;
 
   font-size: 30px;
@@ -15,32 +15,34 @@
 }
 
 .productPrice {
-  position: absolute;
+  position: fixed;
   top: 350px;
   font-size: 35px;
   font-family: 'Courier New', Courier, monospace;
 }
 
-.productContainer {
-  position: relative; /* Add relative positioning to the container */
-  display: flex;
-  flex-direction: row;
-  justify-content: center; /* Center horizontally */
-  align-items: stretch; /* Center vertically */
-}
-
 .productInfo {
-  position: relative;
-  left: 20%;
+  position: fixed;
+  display: flex;
+  top: 70px;
+  justify-content: center;
+  flex-flow: row-reverse;
+  right: 20%;
   white-space: nowrap;
 }
 
+/* use :hover selector for the hovering effect */
+
 .productCard {
   position: absolute;
-  display: inline;
+  display: flex;
   top: 250px;
   left: 15%;
-  background: rgb(197, 196, 196);
+  right: 15%;
+  box-sizing: border-box;
+  border: 5px solid;
+  border-radius: 5px;
+  background: rgb(228, 229, 244);
   width: 400px;
   height: 500px;
   padding: 3rem;
@@ -51,17 +53,18 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 350px;
+  width: 75%;
+  max-width: 350px;
 }
 
 .sizes {
-  position: absolute;
+  position: fixed;
   top: 400px;
   width: 200px;
 }
 
 .button {
-  position: absolute;
+  position: fixed;
   top: 480px;
   width: 199px;
   height: 50px;
@@ -78,4 +81,18 @@
 
 .button:hover {
   background-color: grey;
+}
+
+@media screen and (max-width: 1000px) {
+  .productInfo {
+    margin-top: 20px;
+  }
+
+  .view-container {
+    display: grid;
+  }
+
+  .productCard {
+    background-color: lightblue;
+  }
 }

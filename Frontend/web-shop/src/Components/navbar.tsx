@@ -79,14 +79,11 @@ export const Navbar = () => {
             </Button>
           </Drawer>
 
-          {/* Filter button */}
-
           <Button onClick={open} size="xl" className="filter-selection-button">
             Filter Selection
           </Button>
 
-          <Group justify="space-between">
-            {/* Shopping cart button */}
+          <Group className="buttonGroup"  justify="space-between">
             <Button
               className="shopping-cart-button"
               size="xl"

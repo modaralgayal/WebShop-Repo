@@ -21,5 +21,5 @@
 | 14.4.24     | 2.5 h  | Refactored Navbar code, fixed bugs there. Improved UI                                                                 |
 | 15.4.24     | 2.5 h  | Stuck trying to read and work on CSS problems, not yet solved                                                         |
 | 17.4.24     | 2 h    | Spent lots of time reading and practicing on css flexbox, grouped navbar components                                   |
-| 28.4.24     | 1.5 h  | Made the view product window more responsive to the screen size.                                                      |
+| 28.4.24     | 1.5 h  | Made the view product window more responsive to the screen size (including learning and implementing)                 |
 | Total Hours | 79.5 h |

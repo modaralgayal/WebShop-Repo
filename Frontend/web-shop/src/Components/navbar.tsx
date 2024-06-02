@@ -83,7 +83,7 @@ export const Navbar = () => {
             Filter Selection
           </Button>
 
-          <Group className="buttonGroup"  justify="space-between">
+          <div className="buttonGroup">
             <Button
               className="shopping-cart-button"
               size="xl"
@@ -97,7 +97,6 @@ export const Navbar = () => {
               />
             </Button>
 
-            {/* Logout button */}
 
             <Button
               onClick={handleLogOut}
@@ -108,7 +107,7 @@ export const Navbar = () => {
             >
               Logout
             </Button>
-          </Group>
+          </div>
         </>
       )}
     </div>

@@ -3,10 +3,12 @@
   width: 100%;
   height: 80px;
   background-color: black;
+  transition: height 0.5s;
 }
 
 .buttonGroup {
   display: flex;
+  gap: 10px;
 }
 
 .shopping-cart-button {
@@ -42,6 +44,7 @@
 @media screen and (max-width: 1000px) {
   .buttonGroup {
     display: grid;
+    transition: 0.5s;
   }
 
   .navbar {

@@ -56,7 +56,7 @@ export const DisplayProductFullPage = () => {
   }
 
   return (
-    <div className="view-container">
+    <div>
       <div className="productInfo">
         <p className="productName">{product.name}</p>
         <p className="productDescription">{product.description}</p>

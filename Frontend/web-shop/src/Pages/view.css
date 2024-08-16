@@ -1,46 +1,29 @@
 .productName {
-  position: fixed;
-  top: 250px;
+  position: relative;
   font-size: 55px;
   font-family: 'Times New Roman', Times, serif;
 }
 
 .productDescription {
-  position: fixed;
-  top: 320px;
-
+  position: relative;
   font-size: 50px;
   font-weight: bold;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .productPrice {
-  position: fixed;
-  top: 390px;
+  position: relative;
   font-size: 55px;
   font-family: 'Courier New', Courier, monospace;
 }
 
-.productInfo {
-  position: fixed;
-  top: 70px;
-  justify-content: center;
-  flex-flow: row-reverse;
-  right: 40%;
-  white-space: nowrap;
-}
-
-/* use :hover selector for the hovering effect */
-
 .sizes {
-  position: fixed;
-  top: 470px;
+  position: relative;
   width: 200px;
 }
 
 .button {
-  position: fixed;
-  top: 550px;
+  position: relative;
   width: 199px;
   height: 50px;
   font-size: 16px;
@@ -65,10 +48,11 @@
   width: 100%;
   height: 32.5%;
   padding: 3rem;
+  z-index: 1;
 }
 
 .productImage {
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -80,36 +64,53 @@
   background-color: grey;
 }
 
-@media screen and (max-width: 1000px) {
-  .productInfo {
-    margin-top: 20px;
-  }
+.productInfo {
+  border: 4px solid black;
+  position: fixed;
+  top: 250px;
+  right: 10%;
+  width: auto;
+  height: auto;
+  background-color: bisque;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 15px;
+}
 
+@media screen and (max-width: 1000px) {
   .view-container {
     display: grid;
   }
 
+  .productInfo {
+    position: fixed;
+    align-items: center;
+    top: 60%;
+    left: 50%;
+    transform: translate(
+      -50%,
+      -50%
+    ); 
+    max-width: 900px;
+    width: 95%;
+    z-index: 0;
+    box-sizing: border-box;
+    background-color: beige;
+    padding: 15px;
+    transition: 0.5s;
+  }
+
   .productCard {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: lightblue;
-    width: 50%;
-    left: 1%;
+    max-width: 900px;
+    width: 95%;
+    z-index: 10;
+    transition: 0.5s;
   }
-
-  .productImage {
-    width: 50%;
-    max-width: 350px;
-  }
-
-  .productName{
-
-  }
-
-  .productDescription{
-
-  }
-
-  .productPrice{
-
-  }
-
+  
 }

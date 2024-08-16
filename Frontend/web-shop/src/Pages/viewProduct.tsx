@@ -4,7 +4,6 @@ import productService from '../Services/products.ts'
 import { NativeSelect, Button } from '@mantine/core'
 import userService from '../Services/users'
 import { useToken } from '../Services/currentUser'
-import { Group } from '@mantine/core'
 import './view.css'
 
 interface Product {
@@ -52,6 +51,7 @@ export const DisplayProductFullPage = () => {
         error.response?.data.message ||
           'An error occurred while adding the product to the cart.',
       )
+    
     }
   }
 

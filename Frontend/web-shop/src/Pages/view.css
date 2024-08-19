@@ -1,3 +1,10 @@
+.wholeview {
+  background-color: cornflowerblue;
+  min-height: 100vh; 
+  width: 100%; 
+}
+
+
 .productName {
   position: relative;
   font-size: 55px;
@@ -71,7 +78,7 @@
   right: 10%;
   width: auto;
   height: auto;
-  background-color: bisque;
+  background-color: floralwhite;
   z-index: 0;
   display: flex;
   flex-direction: column;
@@ -79,7 +86,7 @@
   padding: 15px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1400px) {
   .view-container {
     display: grid;
   }
@@ -89,28 +96,23 @@
     align-items: center;
     top: 60%;
     left: 50%;
-    transform: translate(
-      -50%,
-      -50%
-    ); 
+    transform: translate(-50%, -50%);
     max-width: 900px;
     width: 95%;
     z-index: 0;
     box-sizing: border-box;
-    background-color: beige;
     padding: 15px;
     transition: 0.5s;
+    background-color: floralwhite;
   }
 
   .productCard {
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    background-color: lightblue;
     max-width: 900px;
     width: 95%;
     z-index: 10;
     transition: 0.5s;
   }
-  
 }

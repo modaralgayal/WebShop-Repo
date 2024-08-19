@@ -32,6 +32,7 @@ export const DisplayProductFullPage = () => {
     }
     fetchData()
   }, [productId])
+  
 
   if (!product) {
     return <div>Loading...</div>
@@ -51,12 +52,11 @@ export const DisplayProductFullPage = () => {
         error.response?.data.message ||
           'An error occurred while adding the product to the cart.',
       )
-    
     }
   }
 
   return (
-    <div>
+    <div className="wholeview" >
       <div className="productInfo">
         <p className="productName">{product.name}</p>
         <p className="productDescription">{product.description}</p>

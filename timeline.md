@@ -23,4 +23,5 @@
 | 17.4.24     | 2 h     | Spent lots of time reading and practicing on css flexbox, grouped navbar components                                   |
 | 28.4.24     | 1.5 h   | Made the view product window more responsive to the screen size (including learning and implementing)                 |
 | 2.6.24      | 1.25 h  | Started adjusted page size in view page based on media property screen size for smoother user experience, not ready.  |
-| Total Hours | 80.75 h |
+| 28.8.24     | 1.5 h   | Page size adjusting done. Adding review form for all ordered products, implemented switching pages and edited fonts.  |
+| Total Hours | 82.25 h |

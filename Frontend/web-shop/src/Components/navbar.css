@@ -1,5 +1,6 @@
 .navbar {
   position: sticky;
+  display: flex;
   width: 100%;
   height: 80px;
   background-color: black;
@@ -23,12 +24,14 @@
   border-radius: 0px;
   margin-right: 15px;
   width: 130px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .filter-selection-button {
   margin-left: 15px;
   font-size: x-large;
   border-radius: 0px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .shop-name {
@@ -38,7 +41,35 @@
   margin-top: 10px;
   margin-right: auto;
   left: 50%;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   transform: translateX(-50%);
+}
+
+.navbar-tabs {
+  display: flex;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.tab-link {
+  flex: 1;
+  text-decoration: none;
+}
+
+.tabButton {
+  width: 100%;
+  box-sizing: border-box;
+  height: 50px;
+  color: black;
+  background-color: #f6f5f4;
+  font-size: xx-large;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.tabButton:hover {
+  background-color: burlywood;
 }
 
 @media screen and (max-width: 1000px) {
@@ -50,5 +81,4 @@
   .navbar {
     height: 150px;
   }
-
 }

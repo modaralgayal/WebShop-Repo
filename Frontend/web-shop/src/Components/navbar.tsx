@@ -4,7 +4,8 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../Services/authContext'
-import { Group, Button, Slider, Text, Drawer } from '@mantine/core'
+import { Group, Button, Slider, Text, Drawer, Tabs, rem } from '@mantine/core'
+import { IconPhoto } from '@tabler/icons-react'
 import userService from '../Services/users'
 import { useToken } from '../Services/currentUser'
 import { useState } from 'react'
@@ -24,6 +25,7 @@ export const Navbar = () => {
   const { clearToken } = useToken()
   const [value, setValue] = useState(50)
   const [endValue, setEndValue] = useState(50)
+  const currentPath = location.pathname
 
   const handleLogOut = async () => {
     userService.logOut()
@@ -97,7 +99,6 @@ export const Navbar = () => {
               />
             </Button>
 
-
             <Button
               onClick={handleLogOut}
               variant="filled"
@@ -108,6 +109,22 @@ export const Navbar = () => {
               Logout
             </Button>
           </div>
+
+          {isLoggedIn &&
+            (currentPath === '/shop' || currentPath === '/orders') && (
+              <Tabs
+                className="navbar-tabs"
+                variant="outline"
+                defaultValue="Shop"
+              >
+                <Link to="/shop" className="tab-link">
+                  <Button className="tabButton">Shop</Button>
+                </Link>
+                <Link to="/orders" className="tab-link">
+                  <Button className="tabButton">Orders</Button>
+                </Link>
+              </Tabs>
+            )}
         </>
       )}
     </div>

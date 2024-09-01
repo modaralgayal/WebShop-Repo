@@ -5,6 +5,7 @@ import {
   getUserBySessionToken,
   getProductById,
 } from "../types/schemas";
+import mongoose from "mongoose";
 
 export const addProductToBasket = async (req: Request, res: Response) => {
   try {
@@ -25,6 +26,40 @@ export const addProductToBasket = async (req: Request, res: Response) => {
   } catch (error) {
     // @ts-ignore
     return res.status(500).json({ message: "Failed to add product to basket" });
+  }
+};
+
+export const addProductToOrdered = async (req: Request, res: Response) => {
+  try {
+    const productId = req.params.id;
+    const currentUserToken = req.body.userToken;
+
+    const user = await getUserBySessionToken(currentUserToken);
+
+    if (!user || !productId) {
+      return res.status(404).json({ message: "User or Product Not Found" });
+    }
+
+    const orderedProduct = user.ordered.find((item) =>
+      item.product.equals(new mongoose.Types.ObjectId(productId))
+    );
+
+    if (orderedProduct) {
+      orderedProduct.quantity += 1;
+    } else {
+      user.ordered.push({
+        product: new mongoose.Types.ObjectId(productId),
+        quantity: 1,
+      });
+    }
+
+    await user.save();
+
+    return res.status(200).json(user);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Failed to add product to ordered" });
   }
 };
 

@@ -11,6 +11,12 @@ export const userSchema = new mongoose.Schema({
   basket: [
     { type: mongoose.Schema.Types.ObjectId, ref: "Product", select: true },
   ],
+  ordered: [
+    {
+      product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
+      quantity: { type: Number, required: true, default: 1 },
+    },
+  ],
 });
 
 export const productSchema = new mongoose.Schema({

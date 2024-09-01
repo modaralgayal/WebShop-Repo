@@ -10,6 +10,7 @@ interface User extends Document {
     sessionToken: string;
   };
   basket: Array<Product | any>;
+  ordered: Array<{ product: Product | any; quantity: number }>;
 }
 
 interface Product extends Document {

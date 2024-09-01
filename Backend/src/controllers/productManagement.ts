@@ -31,27 +31,29 @@ export const addProductToBasket = async (req: Request, res: Response) => {
 
 export const addProductToOrdered = async (req: Request, res: Response) => {
   try {
-    const productId = req.params.id;
+    const productIds = req.body.productIds;
     const currentUserToken = req.body.userToken;
 
     const user = await getUserBySessionToken(currentUserToken);
 
-    if (!user || !productId) {
-      return res.status(404).json({ message: "User or Product Not Found" });
+    if (!user || !Array.isArray(productIds) || productIds.length === 0) {
+      return res.status(404).json({ message: "User or Product IDs Not Found" });
     }
 
-    const orderedProduct = user.ordered.find((item) =>
-      item.product.equals(new mongoose.Types.ObjectId(productId))
-    );
+    productIds.forEach((productId) => {
+      const orderedProduct = user.ordered.find((item) =>
+        item.product.equals(new mongoose.Types.ObjectId(productId))
+      );
 
-    if (orderedProduct) {
-      orderedProduct.quantity += 1;
-    } else {
-      user.ordered.push({
-        product: new mongoose.Types.ObjectId(productId),
-        quantity: 1,
-      });
-    }
+      if (orderedProduct) {
+        orderedProduct.quantity += 1;
+      } else {
+        user.ordered.push({
+          product: new mongoose.Types.ObjectId(productId),
+          quantity: 1,
+        });
+      }
+    });
 
     await user.save();
 
@@ -59,7 +61,7 @@ export const addProductToOrdered = async (req: Request, res: Response) => {
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Failed to add product to ordered" });
+      .json({ message: "Failed to add products to ordered" });
   }
 };
 

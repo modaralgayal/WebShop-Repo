@@ -9,6 +9,7 @@ import {
 import { isOwner } from "../middleware/verification";
 import {
   addProductToBasket,
+  addProductToOrdered,
   addProductToShop,
   deleteItemFromBasket,
   getAllProducts,
@@ -37,5 +38,6 @@ router.delete("/products/:id", deleteItemFromBasket);
 
 router.get("/config", Configure);
 router.post("/create-payment-intent", PaymentIntent);
+router.get("api/orders", addProductToOrdered)
 
 export default router;

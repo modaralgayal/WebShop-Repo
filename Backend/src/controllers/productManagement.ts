@@ -33,6 +33,7 @@ export const addProductToOrdered = async (req: Request, res: Response) => {
   try {
     const productIds = req.body.productIds;
     const currentUserToken = req.body.userToken;
+    console.log("Adding PRODUCT TO ORDERED")
 
     const user = await getUserBySessionToken(currentUserToken);
 
@@ -92,7 +93,7 @@ export const deleteItemFromBasket = async (req: Request, res: Response) => {
 
     user.basket.splice(productIndex, 1);
     await user.save();
-
+    console.log('DELETED ITEM FROM BASKET')
     return res.status(200).json(user);
   } catch (error) {
     // @ts-ignore

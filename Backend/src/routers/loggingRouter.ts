@@ -38,6 +38,6 @@ router.delete("/products/:id", deleteItemFromBasket);
 
 router.get("/config", Configure);
 router.post("/create-payment-intent", PaymentIntent);
-router.get("api/orders", addProductToOrdered)
+router.post("/api/orders", addProductToOrdered)
 
 export default router;

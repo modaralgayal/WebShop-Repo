@@ -18,7 +18,8 @@ export const CheckOut = () => {
   }
 
   const handleGoToCheckout = () => {
-    navigate('/payment', { state: { totalPrice } })
+    const productIds = Object.keys(productData)
+    navigate('/payment', { state: { totalPrice, productIds } })
   }
 
   useEffect(() => {

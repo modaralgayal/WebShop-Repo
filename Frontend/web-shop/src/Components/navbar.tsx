@@ -4,19 +4,11 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../Services/authContext'
-import { Group, Button, Slider, Text, Drawer, Tabs, rem } from '@mantine/core'
-import { IconPhoto } from '@tabler/icons-react'
+import { Button, Slider, Text, Drawer, Tabs } from '@mantine/core'
 import userService from '../Services/users'
 import { useToken } from '../Services/currentUser'
 import { useState } from 'react'
 import { useDisclosure } from '@mantine/hooks'
-
-interface ProductInt {
-  _id: string
-  name: string
-  price: number
-  icon: string
-}
 
 export const Navbar = () => {
   const { isLoggedIn, logout, setFilteredAmount } = useContext(AuthContext) // Add setFilteredAmount from context

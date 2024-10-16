@@ -15,4 +15,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  resolve: {
+    modules: ['node_modules']
+  }
 }

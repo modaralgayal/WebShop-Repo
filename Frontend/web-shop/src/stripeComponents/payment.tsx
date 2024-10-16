@@ -12,7 +12,10 @@ export const Payment = () => {
   )
   const [clientSecret, setClientSecret] = useState<string>('')
   const location = useLocation()
-  const totalPrice = location.state ? Number(location.state.totalPrice) : null;
+  
+  // Retrieve totalPrice and productIds from location state
+  const totalPrice = location.state ? Number(location.state.totalPrice) : null
+  const productIds = location.state ? location.state.productIds : []
 
   useEffect(() => {
     const fetchConfig = async () => {
@@ -32,17 +35,16 @@ export const Payment = () => {
 
   useEffect(() => {
     const fetchPaymentIntent = async () => {
-        console.log(totalPrice)
       try {
         const response = await axios.post(`${apiBaseUrl}/create-payment-intent`, {
-            totalPrice,
-          });
+          totalPrice, // Send totalPrice
+        })
 
         if (!response) {
           throw new Error('Failed to fetch payment intent')
         }
 
-        const { clientSecret } = await response.data
+        const { clientSecret } = response.data
         setClientSecret(clientSecret)
       } catch (error: any) {
         console.error('Error fetching payment intent:', error.message)
@@ -58,9 +60,9 @@ export const Payment = () => {
       <h1>React Stripe and the Payment Element</h1>
       {clientSecret && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <CheckoutForm />
+          <CheckoutForm productIds={productIds}/>
         </Elements>
       )}
     </div>
-  );
-};
+  )
+}

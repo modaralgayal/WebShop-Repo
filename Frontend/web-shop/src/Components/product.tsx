@@ -33,6 +33,7 @@ const Product: React.FC<ProductProps> = ({
   const handleAddingProduct = async () => {
     try {
       const response = await userService.addProductToBasket(id, token)
+      console.log(response)
     } catch (error: any) {
       console.log(error.response.data.message)
       return error.response.data.message

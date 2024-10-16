@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import Stripe from "stripe";
-import axios from "axios"
-
+import axios from "axios";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
   apiVersion: "2023-10-16",
@@ -19,9 +18,13 @@ export const Configure = async (_req: Request, res: Response) => {
 };
 
 export const PaymentIntent = async (req: Request, res: Response) => {
-  const { totalPrice, productIds, userToken }: { totalPrice: number, productIds: string[], userToken: string } = req.body; // Extract totalPrice, productIds, and userToken
+  const {
+    totalPrice,
+    productIds,
+    userToken,
+  }: { totalPrice: number; productIds: string[]; userToken: string } = req.body; // Extract totalPrice, productIds, and userToken
   const amountInCents: number = totalPrice * 100; // Convert price to cents
-  
+
   console.log("Price in paymentIntent function: ", totalPrice);
 
   try {
@@ -35,9 +38,9 @@ export const PaymentIntent = async (req: Request, res: Response) => {
 
     // Call addProductToOrdered after paymentIntent is successfully created
     try {
-      const response = await axios.post(`http://localhost:3002/api/orders`, {
+      const response = await axios.post(`https://modarshop.online/api/orders`, {
         productIds, // Send the product IDs
-        userToken,  // Send the userToken to identify the user
+        userToken, // Send the userToken to identify the user
       });
 
       if (response.status === 200) {
@@ -53,7 +56,6 @@ export const PaymentIntent = async (req: Request, res: Response) => {
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
-
   } catch (error: any) {
     console.error("Error creating payment intent:", error.message);
     res.status(403).json({ error });

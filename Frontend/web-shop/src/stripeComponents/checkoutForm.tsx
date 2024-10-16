@@ -29,7 +29,7 @@ export const CheckoutForm = ({ productIds }: { productIds: string[] }) => {
     const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-            return_url: `http://localhost:5173/completion`,
+            return_url: `${apiBaseUrl}/completion`,
         },
         redirect: "if_required",
     });
@@ -48,7 +48,7 @@ export const CheckoutForm = ({ productIds }: { productIds: string[] }) => {
             });
 
             if (response.status === 200) {
-                window.location.href = `http://localhost:5173/completion`;
+                window.location.href = `${apiBaseUrl}/completion`;
             } else {
                 setMessage('Failed to add products to ordered.');
             }

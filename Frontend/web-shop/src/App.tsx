@@ -14,6 +14,7 @@ import AuthenticationWrapper from './Components/authenticationwrapper'
 import { Completion } from './stripeComponents/completion'
 import { MantineProvider } from '@mantine/core'
 import { DisplayProductFullPage } from './Pages/viewProduct'
+import { Orders } from './Pages/orders'
 
 const App = () => {
   const { isLoggedIn } = useContext(AuthContext)
@@ -35,6 +36,7 @@ const App = () => {
                 <Link to="/checkout"></Link>
                 <Link to="/payment"></Link>
                 <Link to="/completion"></Link>
+                <Link to="/orders"></Link>
               </div>
               <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -44,7 +46,8 @@ const App = () => {
                 <Route path="/checkout" element={<CheckOut />} />
                 <Route path="/payment" element={<Payment />} />
                 <Route path="/completion" element={<Completion />} />
-                <Route path="/viewProduct/:productId" element={<DisplayProductFullPage />} />
+                <Route path="/viewProduct/:productId" element={<DisplayProductFullPage />} /> 
+                <Route path="/orders" element={<Orders />} />
               </Routes>
             </AuthenticationWrapper>
           </Router>

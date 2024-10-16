@@ -12,55 +12,57 @@ export const CheckoutForm = ({ productIds }: { productIds: string[] }) => {
   const [isProcessing, setIsProcessing] = useState(false)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
+    
+    const userToken = localStorage.getItem('userToken');
+    if (!userToken) {
+        setMessage('User not logged in. Please log in to proceed.');
+        return;
+    }
 
     if (!stripe || !elements) {
-      return
+        return;
     }
 
-    setIsProcessing(true)
+    setIsProcessing(true);
 
     const { error, paymentIntent } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `http://localhost:5173/completion`, // Assuming you have a return URL after payment completion
-      },
-      redirect: "if_required",
-    })
+        elements,
+        confirmParams: {
+            return_url: `http://localhost:5173/completion`,
+        },
+        redirect: "if_required",
+    });
 
-    // Payment handling
     if (error) {
-      setMessage(error.message || "Payment failed.")
-      setIsProcessing(false)
-    } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-      // Payment was successful, now add the products to the user's ordered list
-      try {
-        const userToken = localStorage.getItem('userToken') // Fetch user token
-
-        const response = await axios.post(`${apiBaseUrl}/api/orders`, {
-          productIds,
-          userToken, // Assuming userToken is stored in localStorage or passed somehow
-        })
-
-        if (response.status === 200) {
-          console.log('Products added to ordered successfully')
-          // Redirect to the completion page after successful payment and order processing
-          window.location.href = `http://localhost:5173/completion`
-        } else {
-          setMessage('Failed to add products to ordered.')
-        }
-      } catch (orderError) {
-        console.error('Error adding products to ordered:', orderError)
-        setMessage('Error adding products to ordered.')
-      }
-
-      setMessage('Payment successful!')
-      setIsProcessing(false)
-    } else {
-      setMessage('Payment failed or canceled.')
-      setIsProcessing(false)
+        setMessage(error.message || "Payment failed.");
+        setIsProcessing(false);
+        return;
     }
-  }
+
+    if (paymentIntent && paymentIntent.status === 'succeeded') {
+        try {
+            const response = await axios.post(`${apiBaseUrl}/api/orders`, {
+                productIds,
+                userToken, 
+            });
+
+            if (response.status === 200) {
+                window.location.href = `http://localhost:5173/completion`;
+            } else {
+                setMessage('Failed to add products to ordered.');
+            }
+        } catch (orderError) {
+            console.error('Error adding products to ordered:', orderError);
+            setMessage('Error adding products to ordered.');
+        }
+    } else {
+        setMessage('Payment failed or canceled.');
+    }
+
+    setIsProcessing(false);
+}
+
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>

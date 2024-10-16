@@ -13,7 +13,8 @@ import {
   addProductToShop,
   deleteItemFromBasket,
   getAllProducts,
-  getOneProduct
+  getOneProduct,
+  getUserOrders
 } from "../controllers/productManagement";
 import { deserializeUser } from "../middleware/deserializeuser";
 import { Configure, PaymentIntent } from "../controllers/paymentManagement";
@@ -39,5 +40,6 @@ router.delete("/products/:id", deleteItemFromBasket);
 router.get("/config", Configure);
 router.post("/create-payment-intent", PaymentIntent);
 router.post("/api/orders", addProductToOrdered)
+router.get("/api/orders", getUserOrders)
 
 export default router;

@@ -49,21 +49,28 @@ const Login = () => {
   }, [caughtError])
 
   const handleLogin = async (e: { preventDefault: () => void }) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const user = await userService.login({ email, password })
-      //console.log(user)
-      const userToken = user.authentication.sessionToken
-      setAuthToken(userToken)
-      login()
-      //console.log(userToken)
-      //console.log('Logged in:', user)
-      return navigate('/shop')
+        const user = await userService.login({ email, password });
+        const userToken = user.authentication.sessionToken;
+        
+        // Save the token to localStorage
+        localStorage.setItem('userToken', userToken);
+
+        // Optional: If you're using a global state, call setAuthToken
+        setAuthToken(userToken); 
+        
+        // Update any global auth state (if needed)
+        login();
+        
+        // Navigate to the shop after successful login
+        return navigate('/shop');
     } catch (error: any) {
-      console.log('Login Failed: ', error)
-      return setError(error.toString())
+        console.log('Login Failed: ', error);
+        return setError(error.toString());
     }
-  }
+}
+
 
   return (
     <Fieldset

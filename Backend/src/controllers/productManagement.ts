@@ -33,8 +33,7 @@ export const addProductToOrdered = async (req: Request, res: Response) => {
   try {
     const productIds = req.body.productIds;
     const currentUserToken = req.body.userToken;
-    console.log("Adding PRODUCT TO ORDERED")
-
+    console.log("Received request to add products to ordered", req.body);
     const user = await getUserBySessionToken(currentUserToken);
 
     if (!user || !Array.isArray(productIds) || productIds.length === 0) {
@@ -113,6 +112,31 @@ export const addProductToShop = async (req: Request, res: Response) => {
     return res.sendStatus(403);
   }
 };
+
+
+export const getUserOrders = async (req: Request, res: Response) => {
+  try {
+    const currentUserToken = req.headers.authorization as string | undefined;
+
+    if (!currentUserToken) {
+      throw new Error("Token not Found");
+    }
+
+    const user = await getUserBySessionToken(currentUserToken);
+
+    if (!user) {
+      return res.status(404).json({ message: "User Not Found" });
+    }
+
+    const orderedItems = user;
+    console.log("These are the orders: ", orderedItems)
+
+    return res.status(200).json(orderedItems);
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to fetch orders" });
+  }
+};
+
 
 export const getAllProducts = async (_req: Request, res: Response) => {
   try {

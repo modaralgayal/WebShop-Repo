@@ -22,7 +22,6 @@ export const PaymentIntent = async (req: Request, res: Response) => {
   const { totalPrice, productIds, userToken }: { totalPrice: number, productIds: string[], userToken: string } = req.body; // Extract totalPrice, productIds, and userToken
   const amountInCents: number = totalPrice * 100; // Convert price to cents
   
-  console.log("This is the payment intent body: ", req.body)
   console.log("Price in paymentIntent function: ", totalPrice);
 
   try {
@@ -47,7 +46,7 @@ export const PaymentIntent = async (req: Request, res: Response) => {
         console.error("Failed to add products to ordered", response.data);
       }
     } catch (addOrderError) {
-      console.error("Error calling addProductToOrdered:", addOrderError);
+      //console.error("Error calling addProductToOrdered:", addOrderError);
     }
 
     // Send clientSecret to client

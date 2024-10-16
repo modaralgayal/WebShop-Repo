@@ -23,7 +23,7 @@ export const CheckoutForm = ({ productIds }: { productIds: string[] }) => {
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${apiBaseUrl}/completion`, // Assuming you have a return URL after payment completion
+        return_url: `http://localhost:5173/completion`, // Assuming you have a return URL after payment completion
       },
       redirect: "if_required",
     })
@@ -44,7 +44,8 @@ export const CheckoutForm = ({ productIds }: { productIds: string[] }) => {
 
         if (response.status === 200) {
           console.log('Products added to ordered successfully')
-          // You can redirect the user to a success page here
+          // Redirect to the completion page after successful payment and order processing
+          window.location.href = `http://localhost:5173/completion`
         } else {
           setMessage('Failed to add products to ordered.')
         }

@@ -48,6 +48,7 @@ export const login = async (req: Request, res: Response) => {
 
 export const register = async (req: Request, res: Response) => {
   try {
+    console.log('Received registration data:', req.body); // Log the request body
     const { email, username, password } = req.body;
     if (!email || !password || !username) {
       console.log("a field is missing");

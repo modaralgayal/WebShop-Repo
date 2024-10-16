@@ -28,19 +28,21 @@ const CreateUserForm = () => {
   }, [caughtError])
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await userService.create({ email, username, password })
-      //console.log('trying to create')
-      setEmail('')
-      setUsername('')
-      setPassword('')
+      // Log the data to be sent
+      console.log('Sending data:', { email, username, password });
+      await userService.create({ email, username, password });
+  
+      // Reset form fields
+      setEmail('');
+      setUsername('');
+      setPassword('');
     } catch (error: any) {
-      console.error('User creation failed:', error)
-      setError(error.toString())
+      console.error('User creation failed:', error);
+      setError(error.toString());
     }
-  }
-
+  };
   return (
     <div className='flex-container'>
       <Container size={500} my={150}>

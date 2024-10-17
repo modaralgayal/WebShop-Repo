@@ -1,1 +1,1 @@
-export const apiBaseUrl = 'https://modarshop.online'
+export const apiBaseUrl = 'http://localhost:3002'

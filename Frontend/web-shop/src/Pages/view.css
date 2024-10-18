@@ -1,9 +1,8 @@
 .wholeview {
   background-color: cornflowerblue;
-  min-height: 100vh; 
-  width: 100%; 
+  min-height: 100vh;
+  width: 100%;
 }
-
 
 .productName {
   position: relative;
@@ -89,6 +88,10 @@
 @media screen and (max-width: 1400px) {
   .view-container {
     display: grid;
+  }
+
+  .productName {
+    margin-top: 5%;
   }
 
   .productInfo {

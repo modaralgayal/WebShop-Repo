@@ -13,7 +13,7 @@ export const isOwner = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   try {
     const { id } = req.params;
     const currentUserToken =
@@ -23,25 +23,28 @@ export const isOwner = async (
 
     if (!currentUserToken) {
       console.log("Token Does not exist");
+      // @ts-ignore
       return res.sendStatus(403);
     }
 
     const currentUser: any = await getUserBySessionToken(currentUserToken);
-    //console.log("Current user is", currentUser);
 
     if (!currentUser) {
       console.log("Current user does not exist");
+      // @ts-ignore
       return res.sendStatus(403);
     }
 
     if (currentUser._id.toString() !== id) {
       console.log("You are not the owner");
+      // @ts-ignore
       return res.sendStatus(403);
     }
 
-    return next();
+    next();
   } catch (error) {
     console.log(error);
+    // @ts-ignore
     return res.sendStatus(403);
   }
 };

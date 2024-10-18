@@ -5,29 +5,27 @@ export async function deserializeUser(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<void> {
   const { accessToken } = req.cookies;
   
   if (!accessToken) {
     console.log("AccessToken Not Found");
+    // @ts-ignore
     return res.sendStatus(403);
   }
   
   console.log("Found Token");
 
-  // Await the verification of the JWT
   const { payload, expired } = await verifyJWT(accessToken);
 
   if (payload) {
-    // Attach the user payload to the request object
     // @ts-ignore
     req.user = payload;
   } else if (expired) {
     console.log("AccessToken has expired");
+    // @ts-ignore
     return res.sendStatus(403);
   }
 
-  // Call next middleware
   next();
-  return null
 }

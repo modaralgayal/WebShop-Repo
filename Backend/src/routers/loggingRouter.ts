@@ -19,27 +19,36 @@ import {
 import { deserializeUser } from "../middleware/deserializeuser";
 import { Configure, PaymentIntent } from "../controllers/paymentManagement";
 
+const asyncHandler = (fn: Function) => (req: any, res: any, next: any) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
+
 const router = express.Router();
 
-router.post("/auth/register", register);
-router.post("/auth/login", login);
-router.delete("/auth/logout", logOut);
-router.get("/auth/user", getCurrentUser);
+// Auth routes
+router.post("/auth/register", asyncHandler(register));
+router.post("/auth/login", asyncHandler(login));
+router.delete("/auth/logout", asyncHandler(logOut));
+router.get("/auth/user", asyncHandler(getCurrentUser));
 
-router.get("/api/users", deserializeUser, getAll);
-router.get("/api/users/:id", getById);
+// User routes
+router.get("/api/users", deserializeUser, asyncHandler(getAll));
+router.get("/api/users/:id", asyncHandler(getById));
+router.delete("/api/users/:id", isOwner, asyncHandler(deleteById));
 
-router.delete("/api/users/:id", isOwner, deleteById);
+// Product routes
+router.post("/api/products", asyncHandler(addProductToShop));
+router.post("/products/:id", asyncHandler(addProductToBasket));
+router.get("/api/products", asyncHandler(getAllProducts));
+router.get("/api/products/:id", asyncHandler(getOneProduct));
+router.delete("/products/:id", asyncHandler(deleteItemFromBasket));
 
-router.post("/api/products", addProductToShop);
-router.post("/products/:id", addProductToBasket);
-router.get("/api/products", getAllProducts);
-router.get("/api/products/:id", getOneProduct);
-router.delete("/products/:id", deleteItemFromBasket);
+// Payment routes
+router.get("/config", asyncHandler(Configure));
+router.post("/create-payment-intent", asyncHandler(PaymentIntent));
 
-router.get("/config", Configure);
-router.post("/create-payment-intent", PaymentIntent);
-router.post("/api/orders", addProductToOrdered)
-router.get("/api/orders", getUserOrders)
+// Order routes
+router.post("/api/orders", asyncHandler(addProductToOrdered));
+router.get("/api/orders", asyncHandler(getUserOrders));
 
 export default router;

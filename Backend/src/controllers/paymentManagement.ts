@@ -1,54 +1,65 @@
 import { Request, Response } from "express";
 import Stripe from "stripe";
 import axios from "axios";
-import AWS from "aws-sdk";
+import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
 
-// Initialize the AWS Secrets Manager client
-const secretsManager = new AWS.SecretsManager({ region: "eu-north-1" }); // Set your region
+const secretsManagerClient = new SecretsManagerClient({ region: "eu-north-1" });
 
-// Function to retrieve a secret from Secrets Manager
-const getSecret = async (secretName: string): Promise<string | undefined> => {
+const getSecretValue = async (secretName: string, key: string): Promise<string | undefined> => {
   try {
-    const data = await secretsManager.getSecretValue({ SecretId: secretName }).promise();
-    if ('SecretString' in data) {
-      return data.SecretString;
+    const command = new GetSecretValueCommand({ SecretId: secretName });
+    const data = await secretsManagerClient.send(command);
+
+    if (data.SecretString) {
+      const secret = JSON.parse(data.SecretString);
+
+      if (key in secret) {
+        return secret[key];
+      } else {
+        console.error(`Key "${key}" not found in the secret.`);
+        return undefined;
+      }
     }
+
     return undefined;
-  } catch (err) {
-    console.error("Error retrieving secret:", err);
+  } catch (err: any) {
+    console.error("Error retrieving secret:", err.message);
     return undefined;
   }
 };
 
-// Function to initialize Stripe with the secret key from Secrets Manager
-const initializeStripe = async () => {
-  const secretKey = await getSecret("webshopsecrets/production"); // Replace with your secret name
+const initializeStripe = async (): Promise<Stripe> => {
+  const secretKey = await getSecretValue("webshopsecrets", "STRIPE_SECRET_KEY");
   if (!secretKey) {
     throw new Error("Stripe secret key not found.");
   }
-  return new Stripe(secretKey, { apiVersion: "2023-10-16" });
+  return new Stripe(secretKey, { apiVersion: "2024-09-30.acacia" });
 };
 
 export const Configure = async (_req: Request, res: Response) => {
   try {
-    const stripe = await initializeStripe(); // Initialize Stripe here
-    if (stripe) {
+    const stripe = await initializeStripe();
+    const publishableKey = await getSecretValue("webshopsecrets", "STRIPE_PUBLIC_KEY");
+
+    if (stripe && publishableKey) {
       res.send({
-        publishableKey: process.env.STRIPE_PUBLIC_KEY, // If this is also in Secrets Manager, fetch it similarly
+        publishableKey,
       });
-    } 
+    } else {
+      res.status(500).json({ error: "Stripe or publishable key is missing." });
+    }
   } catch (error) {
-    console.log(error);
+    console.error("Error in Configure:", error);
     res.status(403).json({ error });
   }
 };
 
 export const PaymentIntent = async (req: Request, res: Response) => {
-  const { totalPrice, productIds, userToken } = req.body; 
+  const { totalPrice, productIds, userToken } = req.body;
   const amountInCents: number = totalPrice * 100;
 
   try {
-    const stripe = await initializeStripe(); // Initialize Stripe here
+    const stripe = await initializeStripe();
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
@@ -58,11 +69,10 @@ export const PaymentIntent = async (req: Request, res: Response) => {
 
     console.log("ClientSecret sent");
 
-    // Call addProductToOrdered after paymentIntent is successfully created
     try {
       const response = await axios.post(`https://modarshop.online/api/orders`, {
-        productIds, 
-        userToken, 
+        productIds,
+        userToken,
       });
 
       if (response.status === 200) {
@@ -74,7 +84,6 @@ export const PaymentIntent = async (req: Request, res: Response) => {
       console.error("Error calling addProductToOrdered:", addOrderError);
     }
 
-    // Send clientSecret to client
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
@@ -83,3 +92,4 @@ export const PaymentIntent = async (req: Request, res: Response) => {
     res.status(403).json({ error });
   }
 };
+``

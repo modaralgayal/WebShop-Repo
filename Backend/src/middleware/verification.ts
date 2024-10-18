@@ -26,7 +26,7 @@ export const isOwner = async (
       return res.sendStatus(403);
     }
 
-    const currentUser = await getUserBySessionToken(currentUserToken);
+    const currentUser: any = await getUserBySessionToken(currentUserToken);
     //console.log("Current user is", currentUser);
 
     if (!currentUser) {

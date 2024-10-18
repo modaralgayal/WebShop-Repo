@@ -27,7 +27,7 @@ export const login = async (req: Request, res: Response) => {
       return res.status(403).json({ message: "Wrong Password Try Again" });
     }
 
-    const accessToken = signJWT(
+    const accessToken = await signJWT(
       { email: user.email, name: user.username },
       "1h"
     );

@@ -2,23 +2,20 @@ import { Request, Response } from "express";
 import Stripe from "stripe";
 import axios from "axios";
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
+import { fromIni } from "@aws-sdk/credential-provider-ini";
 
-const secretsManagerClient = new SecretsManagerClient({ region: "eu-north-1" });
+const secretsManagerClient = new SecretsManagerClient({
+  region: "eu-north-1",
+  credentials: fromIni({ profile: "default" }), 
+});
 
 const getSecretValue = async (secretName: string, key: string): Promise<string | undefined> => {
   try {
     const command = new GetSecretValueCommand({ SecretId: secretName });
     const data = await secretsManagerClient.send(command);
-
     if (data.SecretString) {
-      const secret = JSON.parse(data.SecretString);
-
-      if (key in secret) {
-        return secret[key];
-      } else {
-        console.error(`Key "${key}" not found in the secret.`);
-        return undefined;
-      }
+      const secretData = JSON.parse(data.SecretString);
+      return secretData[key];
     }
 
     return undefined;
@@ -29,17 +26,19 @@ const getSecretValue = async (secretName: string, key: string): Promise<string |
 };
 
 const initializeStripe = async (): Promise<Stripe> => {
-  const secretKey = await getSecretValue("webshopsecrets", "STRIPE_SECRET_KEY");
+  const secretKey = await getSecretValue("websecrets", "STRIPE_SECRET_KEY"); 
+
   if (!secretKey) {
     throw new Error("Stripe secret key not found.");
   }
+
   return new Stripe(secretKey, { apiVersion: "2024-09-30.acacia" });
 };
 
 export const Configure = async (_req: Request, res: Response) => {
   try {
     const stripe = await initializeStripe();
-    const publishableKey = await getSecretValue("webshopsecrets", "STRIPE_PUBLIC_KEY");
+    const publishableKey = await getSecretValue("websecrets", "STRIPE_PUBLIC_KEY"); 
 
     if (stripe && publishableKey) {
       res.send({
@@ -56,7 +55,8 @@ export const Configure = async (_req: Request, res: Response) => {
 
 export const PaymentIntent = async (req: Request, res: Response) => {
   const { totalPrice, productIds, userToken } = req.body;
-  const amountInCents: number = totalPrice * 100;
+  const amountInCents: number = totalPrice * 100; 
+  console.log("Product ids in payment Intent: ", req.body)
 
   try {
     const stripe = await initializeStripe();
@@ -67,8 +67,6 @@ export const PaymentIntent = async (req: Request, res: Response) => {
       payment_method_types: ["card"],
     });
 
-    console.log("ClientSecret sent");
-
     try {
       const response = await axios.post(`https://modarshop.online/api/orders`, {
         productIds,
@@ -76,9 +74,9 @@ export const PaymentIntent = async (req: Request, res: Response) => {
       });
 
       if (response.status === 200) {
-        console.log("Products added to ordered successfully");
+        console.log("Payment Intent created.");
       } else {
-        console.error("Failed to add products to ordered", response.data);
+        console.error("Failed to add products to order:", response.data);
       }
     } catch (addOrderError) {
       console.error("Error calling addProductToOrdered:", addOrderError);
@@ -92,4 +90,3 @@ export const PaymentIntent = async (req: Request, res: Response) => {
     res.status(403).json({ error });
   }
 };
-``

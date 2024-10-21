@@ -29,7 +29,7 @@ export const CheckoutForm = ({ productIds }: { productIds: string[] }) => {
     const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-            return_url: `http://modarshop.online/completion`,
+            return_url: `https://modarshop.online/completion`,
         },
         redirect: "if_required",
     });
@@ -48,7 +48,7 @@ export const CheckoutForm = ({ productIds }: { productIds: string[] }) => {
             });
 
             if (response.status === 200) {
-                window.location.href = `http://modarshop.online/completion`;
+                window.location.href = `https://modarshop.online/completion`;
             } else {
                 setMessage('Failed to add products to ordered.');
             }

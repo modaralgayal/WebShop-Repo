@@ -18,7 +18,6 @@ const getProductById = async (productId: string | undefined) => {
     }
     
     const response = await axios.get(`${apiBaseUrl}/api/products/${productId}`);
-    console.log("This is the response:", response);
     return response.data;
   } catch (error) {
     console.error(error);

@@ -21,7 +21,6 @@ const create = async (object: CreatorValues) => {
       `${apiBaseUrl}/auth/register`,
       object,
     )
-    console.log(data)
     return data 
   } catch (error: any) {
     console.error('Error during user creation:', error.response.data.message)
@@ -42,7 +41,6 @@ const login = async (object: LoginValue) => {
 const logOut = async () => {
   try {
     const response = await axios.delete(`${apiBaseUrl}/auth/logout`)
-    console.log('User Logged out', response.data)
     return response.data
   } catch (error) {
     console.log(error)

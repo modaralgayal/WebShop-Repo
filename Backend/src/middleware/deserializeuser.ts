@@ -9,12 +9,12 @@ export async function deserializeUser(
   const { accessToken } = req.cookies;
   
   if (!accessToken) {
-    console.log("AccessToken Not Found");
+    //console.log("AccessToken Not Found");
     // @ts-ignore
     return res.sendStatus(403);
   }
   
-  console.log("Found Token");
+  //console.log("Found Token");
 
   const { payload, expired } = await verifyJWT(accessToken);
 
@@ -22,7 +22,7 @@ export async function deserializeUser(
     // @ts-ignore
     req.user = payload;
   } else if (expired) {
-    console.log("AccessToken has expired");
+    //console.log("AccessToken has expired");
     // @ts-ignore
     return res.sendStatus(403);
   }

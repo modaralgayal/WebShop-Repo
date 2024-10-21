@@ -20,7 +20,6 @@ export const Orders = () => {
         });
 
         if (response.status === 200) {
-          console.log('Fetched orders:', response.data.ordered);
           setOrders(response.data.ordered);
         } else {
           setErrorMessage('Failed to fetch orders.');

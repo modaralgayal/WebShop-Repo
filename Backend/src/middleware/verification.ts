@@ -22,7 +22,7 @@ export const isOwner = async (
         : undefined;
 
     if (!currentUserToken) {
-      console.log("Token Does not exist");
+      //console.log("Token Does not exist");
       // @ts-ignore
       return res.sendStatus(403);
     }
@@ -30,20 +30,20 @@ export const isOwner = async (
     const currentUser: any = await getUserBySessionToken(currentUserToken);
 
     if (!currentUser) {
-      console.log("Current user does not exist");
+      ////console.log("Current user does not exist");
       // @ts-ignore
       return res.sendStatus(403);
     }
 
     if (currentUser._id.toString() !== id) {
-      console.log("You are not the owner");
+      //console.log("You are not the owner");
       // @ts-ignore
       return res.sendStatus(403);
     }
 
     next();
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     // @ts-ignore
     return res.sendStatus(403);
   }
@@ -61,11 +61,11 @@ export const checkcookie = async (
         : undefined;
 
     if (currentUserToken) {
-      console.log("User exists, logging out");
+      //console.log("User exists, logging out");
       return next();
     }
   } catch (error) {
-    console.log("problem checking user", error);
+    //console.log("problem checking user", error);
     return res.sendStatus(403);
   }
 };

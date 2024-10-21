@@ -31,7 +31,6 @@ const CreateUserForm = () => {
     e.preventDefault();
     try {
       // Log the data to be sent
-      console.log('Sending data:', { email, username, password });
       await userService.create({ email, username, password });
   
       // Reset form fields

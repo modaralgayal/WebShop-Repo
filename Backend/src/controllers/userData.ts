@@ -21,7 +21,7 @@ export const getById = async (req: Request, res: Response) => {
     const userData = await getUserById(userId);
 
     if (!userData) {
-      console.log("User not found");
+      //console.log("User not found");
       return res.status(404).json({ error: "User not found" });
     }
 
@@ -37,7 +37,7 @@ export const deleteById = async (req: Request, res: Response) => {
     const user = await getUserById(deleteId);
 
     if (!user) {
-      console.log("User does not exist");
+      //console.log("User does not exist");
       return res.status(404).json({ message: "User not found" });
     }
 
@@ -52,10 +52,9 @@ export const deleteById = async (req: Request, res: Response) => {
 export const getCurrentUser = async (req: Request, res: Response) => {
   try {
     const currentUserToken = req.headers.authorization;
-    //console.log(currentUserToken);
 
     if (!currentUserToken) {
-      console.log("Token Does not exist");
+      //console.log("Token Does not exist");
       return res.sendStatus(403);
     }
 
@@ -63,7 +62,7 @@ export const getCurrentUser = async (req: Request, res: Response) => {
     //console.log(currentUser);
     return res.status(200).json(currentUser);
   } catch (error: any) {
-    console.log(error.response.data.message);
+    //console.log(error.response.data.message);
     return error.response.data.message;
   }
 };

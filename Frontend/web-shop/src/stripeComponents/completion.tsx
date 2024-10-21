@@ -6,14 +6,13 @@ export const Completion = () => {
   const location = useLocation()
 
   useEffect(() => {
-    console.log('Location state: ', location) // Log location state to debug
 
     if (location) {
       handleSuccessfulOrder(location)
     } else {
       console.warn('No state passed to Completion page.')
     }
-  }, [location.state]) // Add location.state as a dependency
+  }, [location.state]) 
 
   return (
     <main className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-800">

@@ -11,7 +11,6 @@ export const addProductToBasket = async (req: Request, res: Response) => {
   try {
     const productId = req.params.id;
     const currentUserToken = req.body.userToken;
-    //console.log(currentUserToken);
     const user = await getUserBySessionToken(currentUserToken);
     console.log("Product Added Successfully");
 
@@ -24,44 +23,7 @@ export const addProductToBasket = async (req: Request, res: Response) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    // @ts-ignore
     return res.status(500).json({ message: "Failed to add product to basket" });
-  }
-};
-
-export const addProductToOrdered = async (req: Request, res: Response) => {
-  try {
-    const productIds = req.body.productIds;
-    const currentUserToken = req.body.userToken;
-    console.log("Received request to add products to ordered", req.body);
-    const user = await getUserBySessionToken(currentUserToken);
-
-    if (!user || !Array.isArray(productIds) || productIds.length === 0) {
-      return res.status(404).json({ message: "User or Product IDs Not Found" });
-    }
-
-    productIds.forEach((productId) => {
-      const orderedProduct = user.ordered.find((item) =>
-        item.product.equals(new mongoose.Types.ObjectId(productId))
-      );
-
-      if (orderedProduct) {
-        orderedProduct.quantity += 1;
-      } else {
-        user.ordered.push({
-          product: new mongoose.Types.ObjectId(productId),
-          quantity: 1,
-        });
-      }
-    });
-
-    await user.save();
-
-    return res.status(200).json(user);
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Failed to add products to ordered" });
   }
 };
 
@@ -92,15 +54,63 @@ export const deleteItemFromBasket = async (req: Request, res: Response) => {
 
     user.basket.splice(productIndex, 1);
     await user.save();
-    console.log('DELETED ITEM FROM BASKET')
+    console.log('DELETED ITEM FROM BASKET');
     return res.status(200).json(user);
   } catch (error) {
-    // @ts-ignore
     return res
       .status(500)
       .json({ message: "Failed to delete item from basket" });
   }
 };
+
+export const addProductToOrdered = async (req: Request, res: Response) => {
+  try {
+    const { productIds, userToken } = req.body; 
+    const user = await getUserBySessionToken(userToken);
+
+    if (!user || !Array.isArray(productIds) || productIds.length === 0) {
+      return res.status(404).json({ message: "User or Product IDs Not Found" });
+    }
+
+    for (const { productId, quantity } of productIds) {
+      if (!mongoose.Types.ObjectId.isValid(productId)) {
+        console.error(`Invalid productId: ${productId}`);
+        return res.status(400).json({ message: `Invalid productId: ${productId}` });
+      }
+
+      const orderedProduct = user.ordered.find((item) =>
+        item.product.equals(new mongoose.Types.ObjectId(productId))
+      );
+
+      if (orderedProduct) {
+        orderedProduct.quantity += quantity;
+      } else {
+        user.ordered.push({
+          product: new mongoose.Types.ObjectId(productId),
+          quantity: quantity,
+        });
+      }
+
+      for (let i = 0; i < quantity; i++) {
+        const productIndex = user.basket.findIndex(
+          (item) => item.toString() === productId
+        );
+
+        if (productIndex !== -1) {
+          user.basket.splice(productIndex, 1);
+        }
+      }
+    }
+
+    await user.save();
+
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error("Error adding products to ordered:", error);
+    return res.status(500).json({ message: "Failed to add products to ordered" });
+  }
+};
+
 
 export const addProductToShop = async (req: Request, res: Response) => {
   try {
@@ -112,7 +122,6 @@ export const addProductToShop = async (req: Request, res: Response) => {
     return res.sendStatus(403);
   }
 };
-
 
 export const getUserOrders = async (req: Request, res: Response) => {
   try {
@@ -129,14 +138,11 @@ export const getUserOrders = async (req: Request, res: Response) => {
     }
 
     const orderedItems = user;
-    console.log("These are the orders: ", orderedItems)
-
     return res.status(200).json(orderedItems);
   } catch (error) {
     return res.status(500).json({ message: "Failed to fetch orders" });
   }
 };
-
 
 export const getAllProducts = async (_req: Request, res: Response) => {
   try {
@@ -150,7 +156,6 @@ export const getAllProducts = async (_req: Request, res: Response) => {
 export const getOneProduct = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    //console.log("This is the id:", id);
     const product = await getProductById(id);
     return res.status(200).json(product);
   } catch (error) {

@@ -44,7 +44,6 @@ export const DisplayProductFullPage = () => {
         console.error('Product ID is undefined')
         return
       }
-      console.log('Id is:', productId)
       await userService.addProductToBasket(productId, token)
       console.log('Product added to cart successfully.')
     } catch (error: any) {

@@ -5,7 +5,11 @@ using **Typescript** with many libraries required.
 
 - [Hourly Documentation](./timeline.md)
 
+- Website **url**: https://modarshop.online
+
 ### Description of Structure
+
+- Point of the app, demonstrate my skill in MERN stack apps and many features regarding it. 
 
 - The app uses mongoDB for storing userdata
   and the many products that i "sell" in the website

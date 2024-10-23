@@ -27,4 +27,5 @@
 | 15.10.24    | 1 h     | Debugging and issues with deployment.                                                                                                                    |
 | 16.10.24    | 4 h     | Added Orders option for webpage. Will start deployment soon. Frontend is on bluehost but backend will be on amazon lightsail because it is much cheaper. |
 | 21.10.24    | 2 h     | Adding products to ordered works, and deleting the item from basket after ordering works too.                                                            |
-| Total Hours | 89.25 h |
+| 23.10.24    | 3 h     | Deployment done, lots of learning on how fileZilla works, and learning deployment on cpanel.                                                             |
+| Total Hours | 92.25 h |

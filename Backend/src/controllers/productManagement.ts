@@ -54,7 +54,7 @@ export const deleteItemFromBasket = async (req: Request, res: Response) => {
 
     user.basket.splice(productIndex, 1);
     await user.save();
-    console.log('DELETED ITEM FROM BASKET');
+    console.log("DELETED ITEM FROM BASKET");
     return res.status(200).json(user);
   } catch (error) {
     return res
@@ -65,7 +65,8 @@ export const deleteItemFromBasket = async (req: Request, res: Response) => {
 
 export const addProductToOrdered = async (req: Request, res: Response) => {
   try {
-    const { productIds, userToken } = req.body; 
+    console.log("The add product to ordered is being called correctly.");
+    const { productIds, userToken } = req.body;
     const user = await getUserBySessionToken(userToken);
 
     if (!user || !Array.isArray(productIds) || productIds.length === 0) {
@@ -75,7 +76,9 @@ export const addProductToOrdered = async (req: Request, res: Response) => {
     for (const { productId, quantity } of productIds) {
       if (!mongoose.Types.ObjectId.isValid(productId)) {
         console.error(`Invalid productId: ${productId}`);
-        return res.status(400).json({ message: `Invalid productId: ${productId}` });
+        return res
+          .status(400)
+          .json({ message: `Invalid productId: ${productId}` });
       }
 
       const orderedProduct = user.ordered.find((item) =>
@@ -107,10 +110,11 @@ export const addProductToOrdered = async (req: Request, res: Response) => {
     return res.status(200).json(user);
   } catch (error) {
     console.error("Error adding products to ordered:", error);
-    return res.status(500).json({ message: "Failed to add products to ordered" });
+    return res
+      .status(500)
+      .json({ message: "Failed to add products to ordered" });
   }
 };
-
 
 export const addProductToShop = async (req: Request, res: Response) => {
   try {

@@ -26,4 +26,5 @@
 | 28.8.24     | 1.5 h   | Page size adjusting done. Adding review form for all ordered products, implemented switching pages and edited fonts.                                     |
 | 15.10.24    | 1 h     | Debugging and issues with deployment.                                                                                                                    |
 | 16.10.24    | 4 h     | Added Orders option for webpage. Will start deployment soon. Frontend is on bluehost but backend will be on amazon lightsail because it is much cheaper. |
-| Total Hours | 87.25 h |
+| 21.10.24    | 2 h     | Adding products to ordered works, and deleting the item from basket after ordering works too.                                                            |
+| Total Hours | 89.25 h |

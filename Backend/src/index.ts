@@ -93,7 +93,34 @@ initializeKeys().catch((err) =>
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// Allow multiple origins for CORS
+const allowedOrigins = [
+  "https://www.modarshop.online",
+  "https://modarshop.online",
+  "https://api.modarshop.online",
+  "http://localhost:5173", // Include localhost for development
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // Allow cookies to be sent along with requests
+  })
+);
+
+app.get("/hello", async (_req, res) => {
+  res.json("Hello Mate!");
+});
+
 app.use(cookieParser());
 app.use("/", router);
 app.use(express.static("dist"));

@@ -2,7 +2,7 @@ import { PaymentElement } from '@stripe/react-stripe-js'
 import { useState, FormEvent } from 'react'
 import { useStripe, useElements } from '@stripe/react-stripe-js'
 import './payments.css'
-import { apiBaseUrl } from '../constants'
+import { apiBaseUrl, confirmUrl } from '../constants'
 import axios from 'axios'
 
 export const CheckoutForm = ({ productIds }: { productIds: string[] }) => {
@@ -12,57 +12,52 @@ export const CheckoutForm = ({ productIds }: { productIds: string[] }) => {
   const [isProcessing, setIsProcessing] = useState(false)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    const userToken = localStorage.getItem('userToken');
+    e.preventDefault()
+
+    const userToken = localStorage.getItem('userToken')
     if (!userToken) {
-        setMessage('User not logged in. Please log in to proceed.');
-        return;
+      setMessage('User not logged in. Please log in to proceed.')
+      return
     }
 
     if (!stripe || !elements) {
-        return;
+      return
     }
 
-    setIsProcessing(true);
+    setIsProcessing(true)
 
     const { error, paymentIntent } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-            return_url: `https://modarshop.online/completion`,
-        },
-        redirect: "if_required",
-    });
+      elements,
+      confirmParams: {
+        return_url: confirmUrl,
+      },
+      redirect: 'if_required',
+    })
 
     if (error) {
-        setMessage(error.message || "Payment failed.");
-        setIsProcessing(false);
-        return;
+      setMessage(error.message || 'Payment failed.')
+      setIsProcessing(false)
+      return
     }
 
     if (paymentIntent && paymentIntent.status === 'succeeded') {
-        try {
-            const response = await axios.post(`${apiBaseUrl}/api/orders`, {
-                productIds,
-                userToken, 
-            });
-
-            if (response.status === 200) {
-                window.location.href = `https://modarshop.online/completion`;
-            } else {
-                setMessage('Failed to add products to ordered.');
-            }
-        } catch (orderError) {
-            console.error('Error adding products to ordered:', orderError);
-            setMessage('Error adding products to ordered.');
-        }
+      try {
+        console.log('Adding to ordered')
+        await axios.post(`${apiBaseUrl}/api/orders`, {
+          productIds,
+          userToken,
+        })
+        console.log('Successfully added to ordered')
+      } catch (orderError) {
+        console.error('Error adding products to ordered:', orderError)
+        setMessage('Error adding products to ordered.')
+      }
     } else {
-        setMessage('Payment failed or canceled.');
+      setMessage('Payment failed or canceled.')
     }
 
-    setIsProcessing(false);
-}
-
+    setIsProcessing(false)
+  }
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
